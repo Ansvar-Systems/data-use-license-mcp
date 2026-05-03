@@ -34,4 +34,23 @@ describe("database integrity", () => {
       expect(colNames).toContain(required);
     }
   });
+
+  it("edges table exists with required columns", () => {
+    const cols = db.prepare("PRAGMA table_info(edges)").all() as Array<{ name: string }>;
+    const colNames = cols.map((c) => c.name);
+    for (const required of ["id", "edge_type", "source_id", "target_id", "metadata"]) {
+      expect(colNames).toContain(required);
+    }
+  });
+
+  it("FTS5 table entities_fts exists", () => {
+    const row = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='entities_fts'").get();
+    expect(row).toBeDefined();
+  });
+
+  it("FTS5 health check (MATCH query syntactically valid)", () => {
+    expect(() => {
+      db.prepare("SELECT id FROM entities_fts WHERE entities_fts MATCH 'x' LIMIT 1").all();
+    }).not.toThrow();
+  });
 });

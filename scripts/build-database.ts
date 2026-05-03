@@ -33,10 +33,35 @@ function buildSchema(db: Database.Database) {
       notes TEXT,
       type_specific TEXT
     );
-
     CREATE INDEX IF NOT EXISTS idx_entities_type ON entities(entity_type);
     CREATE INDEX IF NOT EXISTS idx_entities_jurisdiction ON entities(jurisdiction);
     CREATE INDEX IF NOT EXISTS idx_entities_spdx ON entities(spdx_id);
+
+    CREATE TABLE IF NOT EXISTS edges (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      edge_type TEXT NOT NULL CHECK (edge_type IN (
+        'compatible_with', 'incompatible_with', 'applies_alongside',
+        'subsumes', 'subsumed_by', 'interpreted_by', 'clarified_by', 'cross_corpus_anchor'
+      )),
+      source_id TEXT NOT NULL,
+      target_id TEXT NOT NULL,
+      metadata TEXT,
+      FOREIGN KEY (source_id) REFERENCES entities(id),
+      UNIQUE(edge_type, source_id, target_id)
+    );
+    CREATE INDEX IF NOT EXISTS idx_edges_source ON edges(source_id);
+    CREATE INDEX IF NOT EXISTS idx_edges_target ON edges(target_id);
+    CREATE INDEX IF NOT EXISTS idx_edges_type ON edges(edge_type);
+
+    CREATE VIRTUAL TABLE IF NOT EXISTS entities_fts USING fts5(
+      id UNINDEXED,
+      name,
+      short_name,
+      aliases,
+      description,
+      tags,
+      tokenize = "unicode61 remove_diacritics 2"
+    );
   `);
 }
 
