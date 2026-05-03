@@ -1,0 +1,23 @@
+# Local-development template only. Production entry lives in
+# /opt/ansvar/prod/mcp/docker-compose.yml on the Hetzner host.
+version: "3.8"
+
+services:
+  data-use-license:
+    build: .
+    image: ghcr.io/ansvar-systems/data-use-license-mcp:latest
+    container_name: ansvar-mcp-data-use-license
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    labels:
+      - "com.centurylinklabs.watchtower.scope=mcp"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/health').then(r=>r.ok?process.exit(0):process.exit(1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
