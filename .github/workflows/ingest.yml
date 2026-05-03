@@ -1,0 +1,32 @@
+name: Ingest Upstream
+
+on:
+  schedule:
+    - cron: "0 4 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ingestion (no-op in Phase 1A)
+        run: |
+          echo "Phase 1A skeleton: ingestion will be wired in Phase 1B-1F per group."
+          echo "This workflow exists to satisfy Infrastructure Standard §5 (the 7 workflows)."
