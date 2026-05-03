@@ -18,7 +18,7 @@ Standard: `docs/mcp-pre-deploy-verification.md` (13 gates)
 | G4 Contract Tests | PASS | 23/23 tests, 6 files (search_entities, get_entity, check_compatibility, get_obligations, search_vendor_templates, citation-shape) |
 | G5 DB Integrity | PASS | `integrity_check`=ok, `journal_mode`=delete, 13 entities, 13 entities_fts, FTS5 MATCH query OK |
 | G6 Coverage | N/A | Law-only gate (this is a non-law MCP) |
-| G7 HTTP Session | DEFERRED | Verified at gateway integration (Plan Task 29) |
+| G7 HTTP Session | PARTIAL | Stdio transport verified end-to-end on dev (`docker run` smoke 2026-05-03): `initialize` + `notifications/initialized` + `tools/list` + `tools/call search_entities` all pass. HTTP-MCP transport (StreamableHTTPServerTransport) NOT implemented in `src/server.ts` — only stdio. Gateway integration via HTTP will require Phase 1B addition. |
 | G8 Response Shape | PASS | `tests/contract/citation-shape.contract.test.ts` 3/3 |
 | G9 Free-Tier Boundary | PASS | No premium-tier item points at team-tier tool across 3 sample results |
 | G10 Container Build | PASS-WITH-CAVEAT | Image: 261 MB (target 200 MB). See breakdown below. |
@@ -119,7 +119,14 @@ console.log('PASS');
 "
 ```
 
-## Next Steps
+## Phase 1A Completion Status (2026-05-03)
 
-- Plan Task 25: Push to GitHub (`Ansvar-Systems/data-use-license-mcp`) + configure secrets — requires user authorization (creates new public repo, triggers GHCR + npm publish workflows)
-- Plan Task 29: Add to dev-server `/opt/ansvar/dev/mcp/docker-compose.yml`, `docker compose pull && up -d data-use-license` — requires user authorization (modifies shared dev-server state); G7 marked PASS once verified through dev gateway
+All 13 gates evaluated. Repo `Ansvar-Systems/data-use-license-mcp` is public, on `main` at `4af4249`. CI green. GHCR image published at `ghcr.io/ansvar-systems/data-use-license-mcp:latest`. npm package published at `@ansvar/data-use-license-mcp@0.1.0` with sigstore provenance.
+
+End-to-end smoke test executed on dev server (135.181.100.113) via standalone `docker run` (no compose drift). MCP responds to stdio protocol, all 5 tools registered, search_entities returns Source-Attribution-compliant results. Container torn down post-test.
+
+## Phase 1B Follow-ups (separate spec)
+
+- Add HTTP-MCP transport to `src/server.ts` (StreamableHTTPServerTransport or SSE) so the gateway can reach the MCP over HTTP. Stdio-subprocess routing is also possible but requires gateway-side configuration.
+- Per spec §6, ingest the actual corpus (Group 1: SPDX deep-enrichment; Group 2: CC family canonical; Group 3: ODC; Group 4: gov open-data terms; Group 5: legal regimes; Group 6: vendor templates). Phase 1A ships only the 13 entries migrated from `infrastructure/attribution-licenses.json`.
+- After arch-docs PR `feat/data-use-license-mcp-bootstrap` merges to main, the gateway routing table picks up the manifest declaration and the gateway smoke tests in the manifest become live.
