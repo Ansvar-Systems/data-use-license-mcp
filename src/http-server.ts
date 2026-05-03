@@ -1,4 +1,3 @@
-// src/http-server.ts
 import express from "express";
 
 export function startHttpServer(port: number): void {
