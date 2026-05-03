@@ -1,0 +1,95 @@
+{
+  "Apache-2.0": {
+    "name": "Apache License 2.0",
+    "url": "https://www.apache.org/licenses/LICENSE-2.0",
+    "spdx": "Apache-2.0",
+    "commercial_allowed": true,
+    "attribution_required": true
+  },
+  "CC-BY-4.0": {
+    "name": "Creative Commons Attribution 4.0 International",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "spdx": "CC-BY-4.0",
+    "commercial_allowed": true,
+    "attribution_required": true
+  },
+  "CC-BY-NC-4.0": {
+    "name": "Creative Commons Attribution-NonCommercial 4.0 International",
+    "url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "spdx": "CC-BY-NC-4.0",
+    "commercial_allowed": false,
+    "attribution_required": true
+  },
+  "CC-BY-NC-SA-4.0": {
+    "name": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International",
+    "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "spdx": "CC-BY-NC-SA-4.0",
+    "commercial_allowed": false,
+    "attribution_required": true
+  },
+  "CC-BY-SA-4.0": {
+    "name": "Creative Commons Attribution-ShareAlike 4.0 International",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "spdx": "CC-BY-SA-4.0",
+    "commercial_allowed": true,
+    "attribution_required": true
+  },
+  "CC0-1.0": {
+    "name": "Creative Commons Zero v1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "spdx": "CC0-1.0",
+    "commercial_allowed": true,
+    "attribution_required": false
+  },
+  "Crown-Copyright": {
+    "name": "Crown Copyright",
+    "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/",
+    "spdx": null,
+    "commercial_allowed": true,
+    "attribution_required": true
+  },
+  "Custom-Vendor": {
+    "name": "Custom vendor or partnership terms",
+    "url": null,
+    "spdx": null,
+    "commercial_allowed": false,
+    "attribution_required": true,
+    "requires_vendor_terms_url": true
+  },
+  "EU-Decision-2011-833": {
+    "name": "European Commission reuse policy under Decision 2011/833/EU",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011D0833",
+    "spdx": null,
+    "commercial_allowed": true,
+    "attribution_required": true
+  },
+  "License-Unverified": {
+    "name": "License unverified",
+    "url": null,
+    "spdx": null,
+    "commercial_allowed": false,
+    "attribution_required": true,
+    "audit_status": "UNCLEAR"
+  },
+  "MIT": {
+    "name": "MIT License",
+    "url": "https://opensource.org/license/mit/",
+    "spdx": "MIT",
+    "commercial_allowed": true,
+    "attribution_required": true
+  },
+  "OGL-3.0": {
+    "name": "Open Government Licence v3.0",
+    "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "spdx": "OGL-UK-3.0",
+    "commercial_allowed": true,
+    "attribution_required": true
+  },
+  "Public-Domain": {
+    "name": "Public domain",
+    "url": null,
+    "spdx": null,
+    "commercial_allowed": true,
+    "attribution_required": false
+  }
+}

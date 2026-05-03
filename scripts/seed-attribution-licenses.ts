@@ -3,9 +3,11 @@ import Database from "better-sqlite3";
 import { readFileSync } from "node:fs";
 
 const DB_PATH = "./data/database.db";
+// Default: in-repo seed file (used in Docker build + CI). Override with
+// ATTRIBUTION_LICENSES_PATH for local dev against a sibling arch-docs checkout.
 const SOURCE_PATH =
   process.env.ATTRIBUTION_LICENSES_PATH
-  ?? "../Ansvar-Architecture-Documentation/infrastructure/attribution-licenses.json";
+  ?? "./data/seed/attribution-licenses.json";
 
 interface UpstreamEntry {
   name: string;

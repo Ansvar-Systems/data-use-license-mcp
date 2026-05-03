@@ -1,8 +1,11 @@
 # Multi-stage builder
 FROM node:20-alpine AS builder
+RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --ignore-scripts && npm cache clean --force
+# Rebuild better-sqlite3 native bindings (postinstall was skipped by --ignore-scripts)
+RUN cd node_modules/better-sqlite3 && npm run build-release
 COPY . .
 RUN npm run build && npm run build:db && npm prune --omit=dev
 
