@@ -2,6 +2,7 @@
 import Database from "better-sqlite3";
 import { mkdirSync, rmSync, existsSync } from "node:fs";
 import { dirname } from "node:path";
+import { execFileSync } from "node:child_process";
 
 const DB_PATH = "./data/database.db";
 
@@ -74,6 +75,16 @@ function main() {
   buildSchema(db);
   db.exec("VACUUM;");
   db.close();
+
+  // Run seed migration in a child process. Use execFileSync (no shell) — argv array is hardcoded.
+  execFileSync("npx", ["tsx", "scripts/seed-attribution-licenses.ts"], { stdio: "inherit" });
+
+  // Final VACUUM to finalize the post-seed DB
+  const db2 = new Database(DB_PATH);
+  db2.pragma("journal_mode = DELETE");
+  db2.exec("VACUUM;");
+  db2.close();
+
   console.log("Database built at", DB_PATH);
 }
 
