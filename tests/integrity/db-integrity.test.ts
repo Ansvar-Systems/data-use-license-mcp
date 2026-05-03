@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import Database from "better-sqlite3";
 import { existsSync } from "node:fs";
 
@@ -10,6 +10,10 @@ describe("database integrity", () => {
       throw new Error("Run `npm run build:db` first.");
     }
     db = new Database("./data/database.db", { readonly: true });
+  });
+
+  afterAll(() => {
+    db?.close();
   });
 
   it("PRAGMA integrity_check returns 'ok'", () => {

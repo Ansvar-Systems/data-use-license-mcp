@@ -37,6 +37,7 @@ function buildSchema(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_entities_type ON entities(entity_type);
     CREATE INDEX IF NOT EXISTS idx_entities_jurisdiction ON entities(jurisdiction);
     CREATE INDEX IF NOT EXISTS idx_entities_spdx ON entities(spdx_id);
+    CREATE INDEX IF NOT EXISTS idx_entities_last_fetched ON entities(last_fetched_at);
 
     CREATE TABLE IF NOT EXISTS edges (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
