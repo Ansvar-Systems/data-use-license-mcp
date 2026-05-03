@@ -1,0 +1,50 @@
+{
+  "name": "@ansvar/data-use-license-mcp",
+  "version": "0.1.0",
+  "description": "MCP server providing authoritative metadata on data-use licenses, government open-data terms, legal regimes, and vendor TOS templates.",
+  "type": "module",
+  "mcpName": "data-use-license",
+  "main": "dist/server.js",
+  "bin": {
+    "data-use-license-mcp": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:db": "tsx scripts/build-database.ts",
+    "lint": "eslint src tests scripts --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:contract": "vitest run tests/contract",
+    "test:unit": "vitest run tests/unit",
+    "test:integrity": "vitest run tests/integrity",
+    "start": "node dist/server.js"
+  },
+  "files": ["dist", "data", "README.md", "LICENSE"],
+  "engines": { "node": ">=20.0.0" },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "better-sqlite3": "^11.0.0",
+    "express": "^4.21.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ansvar-Systems/data-use-license-mcp.git"
+  }
+}
