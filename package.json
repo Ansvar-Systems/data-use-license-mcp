@@ -1,13 +1,11 @@
 {
   "name": "@ansvar/data-use-license-mcp",
   "version": "0.2.0",
+  "private": true,
   "description": "MCP server providing authoritative metadata on data-use licenses, government open-data terms, legal regimes, and vendor TOS templates.",
   "type": "module",
   "mcpName": "data-use-license",
   "main": "dist/index.js",
-  "bin": {
-    "data-use-license-mcp": "dist/index.js"
-  },
   "scripts": {
     "build": "tsc",
     "build:db": "tsx scripts/build-database.ts",
@@ -42,10 +40,6 @@
     "tsx": "^4.0.0",
     "typescript": "^5.4.0",
     "vitest": "^1.6.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
   },
   "license": "Apache-2.0",
   "repository": {
