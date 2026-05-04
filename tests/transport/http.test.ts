@@ -22,6 +22,33 @@ describe('G7.1 + G7.2 — initialize returns Mcp-Session-Id with v4 UUID', () =>
   });
 });
 
+describe('G7.3 — follow-up tools/list with same session returns tools array', () => {
+  let handle: HttpServerHandle;
+
+  beforeEach(async () => {
+    handle = await startHttpServer({ port: 0 });
+  });
+
+  afterEach(async () => {
+    await handle.close();
+  });
+
+  it('reuses transport and returns 5 tools', async () => {
+    const init = await postJson(handle.port, '/mcp', initializePayload());
+    const sid = init.headers['mcp-session-id'];
+    expect(sid).toBeTruthy();
+
+    const list = await postJson(handle.port, '/mcp', JSON.stringify({
+      jsonrpc: '2.0', id: 2, method: 'tools/list', params: {},
+    }), { 'mcp-session-id': sid! });
+
+    expect(list.statusCode).toBe(200);
+    const tools = extractToolsArray(list.body);
+    expect(tools).toHaveLength(5);
+    expect(tools.map((t: { name: string }) => t.name)).toContain('search_entities');
+  });
+});
+
 function initializePayload(): string {
   return JSON.stringify({
     jsonrpc: '2.0',
@@ -54,4 +81,12 @@ function postJson(port: number, path: string, body: string, extraHeaders: Record
     req.write(body);
     req.end();
   });
+}
+
+function extractToolsArray(body: string): Array<{ name: string }> {
+  // SSE frames look like "event: message\ndata: {...}\n\n"; JSON bodies are a single object.
+  const dataMatch = body.match(/data:\s*(\{.*\})\s*$/m);
+  const json = dataMatch ? dataMatch[1] : body;
+  const parsed = JSON.parse(json);
+  return parsed.result?.tools ?? [];
 }
