@@ -101,9 +101,14 @@ npm run build
 npm test
 ```
 
-Run locally:
+Run locally (stdio):
 ```bash
-node dist/server.js
+node dist/index.js
+```
+
+Run locally (HTTP, port 3000):
+```bash
+npm start
 ```
 
 ## License
