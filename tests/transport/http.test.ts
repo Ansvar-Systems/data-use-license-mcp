@@ -49,6 +49,30 @@ describe('G7.3 — follow-up tools/list with same session returns tools array', 
   });
 });
 
+describe('G7.4 — bogus session id is safe', () => {
+  let handle: HttpServerHandle;
+
+  beforeEach(async () => {
+    handle = await startHttpServer({ port: 0 });
+  });
+
+  afterEach(async () => {
+    await handle.close();
+  });
+
+  it('returns 200 (new session) or 4xx; never tools from a prior run', async () => {
+    const res = await postJson(handle.port, '/mcp', JSON.stringify({
+      jsonrpc: '2.0', id: 1, method: 'tools/list', params: {},
+    }), { 'mcp-session-id': 'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee' });
+
+    expect([200, 400, 404]).toContain(res.statusCode);
+    if (res.statusCode === 200) {
+      const tools = extractToolsArray(res.body);
+      expect(tools).toHaveLength(0);
+    }
+  });
+});
+
 function initializePayload(): string {
   return JSON.stringify({
     jsonrpc: '2.0',
