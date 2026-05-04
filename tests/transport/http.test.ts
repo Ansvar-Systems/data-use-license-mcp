@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { startHttpServer, type HttpServerHandle } from '../../src/http-server.js';
+import { startHttpServer, type HttpServerHandle, registerShutdownHandler } from '../../src/http-server.js';
 import { request as httpRequest } from 'node:http';
 
 describe('G7.1 + G7.2 — initialize returns Mcp-Session-Id with v4 UUID', () => {
@@ -92,6 +92,42 @@ describe('/health endpoint', () => {
     expect(typeof body.entities).toBe('number');
     expect(body.entities).toBeGreaterThan(0);
     expect(body.server).toBe('data-use-license-mcp');
+  });
+});
+
+describe('path coverage', () => {
+  let handle: HttpServerHandle;
+
+  beforeEach(async () => {
+    handle = await startHttpServer({ port: 0 });
+  });
+
+  afterEach(async () => {
+    await handle.close();
+  });
+
+  it('returns 404 on unknown path', async () => {
+    const res = await getJson(handle.port, '/does-not-exist');
+    expect(res.statusCode).toBe(404);
+    expect(JSON.parse(res.body)).toMatchObject({ error: 'Not found' });
+  });
+
+  it('returns 400 on GET /mcp without session header', async () => {
+    const res = await getJson(handle.port, '/mcp');
+    expect(res.statusCode).toBe(400);
+    expect(JSON.parse(res.body)).toMatchObject({ error: 'Bad request' });
+  });
+});
+
+describe('SIGTERM lifecycle', () => {
+  it('registerShutdownHandler adds and removes a SIGTERM listener cleanly', async () => {
+    const handle = await startHttpServer({ port: 0 });
+    const before = process.listenerCount('SIGTERM');
+    const dispose = registerShutdownHandler(handle);
+    expect(process.listenerCount('SIGTERM')).toBe(before + 1);
+    dispose();
+    expect(process.listenerCount('SIGTERM')).toBe(before);
+    await handle.close();
   });
 });
 
