@@ -1,12 +1,12 @@
 {
   "name": "@ansvar/data-use-license-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MCP server providing authoritative metadata on data-use licenses, government open-data terms, legal regimes, and vendor TOS templates.",
   "type": "module",
   "mcpName": "data-use-license",
-  "main": "dist/server.js",
+  "main": "dist/index.js",
   "bin": {
-    "data-use-license-mcp": "dist/server.js"
+    "data-use-license-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -17,19 +17,24 @@
     "test:contract": "vitest run tests/contract",
     "test:unit": "vitest run tests/unit",
     "test:integrity": "vitest run tests/integrity",
-    "start": "node dist/server.js"
+    "start": "node dist/http-server.js"
   },
-  "files": ["dist", "data", "README.md", "LICENSE"],
-  "engines": { "node": ">=20.0.0" },
+  "files": [
+    "dist",
+    "data",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "better-sqlite3": "^11.0.0",
-    "express": "^5.0.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.0",
-    "@types/express": "^5.0.0",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
