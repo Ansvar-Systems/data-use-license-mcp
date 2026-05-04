@@ -73,6 +73,28 @@ describe('G7.4 — bogus session id is safe', () => {
   });
 });
 
+describe('/health endpoint', () => {
+  let handle: HttpServerHandle;
+
+  beforeEach(async () => {
+    handle = await startHttpServer({ port: 0 });
+  });
+
+  afterEach(async () => {
+    await handle.close();
+  });
+
+  it('returns 200 + status:ok when entities table has rows', async () => {
+    const res = await getJson(handle.port, '/health');
+    expect(res.statusCode).toBe(200);
+    const body = JSON.parse(res.body);
+    expect(body.status).toBe('ok');
+    expect(typeof body.entities).toBe('number');
+    expect(body.entities).toBeGreaterThan(0);
+    expect(body.server).toBe('data-use-license-mcp');
+  });
+});
+
 function initializePayload(): string {
   return JSON.stringify({
     jsonrpc: '2.0',
@@ -103,6 +125,18 @@ function postJson(port: number, path: string, body: string, extraHeaders: Record
     });
     req.on('error', reject);
     req.write(body);
+    req.end();
+  });
+}
+
+function getJson(port: number, path: string): Promise<{ statusCode: number; body: string }> {
+  return new Promise((resolve, reject) => {
+    const req = httpRequest({ hostname: '127.0.0.1', port, path, method: 'GET' }, (res) => {
+      const chunks: Buffer[] = [];
+      res.on('data', (c) => chunks.push(c));
+      res.on('end', () => resolve({ statusCode: res.statusCode ?? 0, body: Buffer.concat(chunks).toString('utf8') }));
+    });
+    req.on('error', reject);
     req.end();
   });
 }
