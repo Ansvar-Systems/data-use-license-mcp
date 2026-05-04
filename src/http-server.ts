@@ -1,4 +1,4 @@
-import { createServer, type Server as HttpServer } from 'node:http';
+import { createServer, type Server as HttpServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { randomUUID } from 'node:crypto';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createMcpServer, SERVER_NAME, SERVER_VERSION } from './mcp-server.js';
@@ -17,11 +17,13 @@ export async function startHttpServer(opts: { port: number }): Promise<HttpServe
       const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`);
 
       if (url.pathname === '/health') {
-        return handleHealth(res);
+        handleHealth(res);
+        return;
       }
 
       if (url.pathname === '/mcp' || url.pathname === '/') {
-        return handleMcp(req, res, transports);
+        await handleMcp(req, res, transports);
+        return;
       }
 
       res.writeHead(404, { 'Content-Type': 'application/json' });
@@ -64,7 +66,7 @@ export function registerShutdownHandler(handle: HttpServerHandle): () => void {
   return () => { process.off('SIGTERM', onSigterm); };
 }
 
-async function handleMcp(req: import('http').IncomingMessage, res: import('http').ServerResponse, transports: Map<string, StreamableHTTPServerTransport>): Promise<void> {
+async function handleMcp(req: IncomingMessage, res: ServerResponse, transports: Map<string, StreamableHTTPServerTransport>): Promise<void> {
   const sessionHeader = req.headers['mcp-session-id'];
   const sessionId = Array.isArray(sessionHeader) ? sessionHeader[0] : sessionHeader;
 
@@ -91,7 +93,7 @@ async function handleMcp(req: import('http').IncomingMessage, res: import('http'
   if (transport.sessionId) transports.set(transport.sessionId, transport);
 }
 
-function handleHealth(res: import('http').ServerResponse): void {
+function handleHealth(res: ServerResponse): void {
   try {
     const db = getDb();
     const row = db.prepare('SELECT COUNT(*) as count FROM entities').get() as { count: number };
@@ -105,7 +107,8 @@ function handleHealth(res: import('http').ServerResponse): void {
       entities: Number(row.count),
       timestamp: new Date().toISOString(),
     }));
-  } catch {
+  } catch (err) {
+    console.error('Health check DB query failed:', err);
     res.writeHead(503, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       status: 'degraded',
