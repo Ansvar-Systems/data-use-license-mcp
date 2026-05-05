@@ -35,19 +35,40 @@ function codeToId(code: string): string {
   return code.toLowerCase();
 }
 
+const ENTITY_TYPE_OVERRIDES: Record<string, "license" | "terms" | "legal_regime" | "vendor_template"> = {
+  "Custom-Vendor": "vendor_template",
+  "Crown-Copyright": "legal_regime",
+  "Norwegian-Court-Publication": "legal_regime",
+  "Public-Domain": "legal_regime",
+  "US-Federal-PD": "legal_regime",
+  "EU-Decision-2011-833": "terms",
+  "EU-Decision-2011-833-Commission-Only": "terms",
+  "Cyprus-PSI": "terms",
+  "Etalab-2.0": "terms",
+  "NLOD-2.0": "terms",
+  "OGL-3.0": "terms",
+  "OGL-UK-2.0": "terms",
+};
+
+const JURISDICTION_OVERRIDES: Record<string, string> = {
+  "Crown-Copyright": "GB",
+  "OGL-3.0": "GB",
+  "OGL-UK-2.0": "GB",
+  "EU-Decision-2011-833": "EU",
+  "EU-Decision-2011-833-Commission-Only": "EU",
+  "Cyprus-PSI": "CY",
+  "Etalab-2.0": "FR",
+  "NLOD-2.0": "NO",
+  "Norwegian-Court-Publication": "NO",
+  "US-Federal-PD": "US",
+};
+
 function classifyEntityType(code: string): "license" | "terms" | "legal_regime" | "vendor_template" {
-  if (code === "Custom-Vendor") return "vendor_template";
-  if (code === "Crown-Copyright") return "legal_regime";
-  if (code === "EU-Decision-2011-833") return "terms";
-  if (code === "Public-Domain") return "legal_regime";
-  return "license";
+  return ENTITY_TYPE_OVERRIDES[code] ?? "license";
 }
 
 function classifyJurisdiction(code: string): string {
-  if (code === "Crown-Copyright") return "GB";
-  if (code === "OGL-3.0") return "GB";
-  if (code === "EU-Decision-2011-833") return "EU";
-  return "INTERNATIONAL";
+  return JURISDICTION_OVERRIDES[code] ?? "INTERNATIONAL";
 }
 
 function migrate() {
