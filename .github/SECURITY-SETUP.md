@@ -10,8 +10,9 @@ This file documents the GHAS / repo settings for this MCP. Configure at repo cre
 
 ## Required Repo Secrets
 
-- `NPM_TOKEN` — Classic Automation Token for npm publish (required by `publish-npm.yml`).
 - `SEMGREP_APP_TOKEN` — Semgrep SaaS managed-rules token (required by `semgrep.yml`).
+
+Distribution is GHCR-only (npm publishing was removed 2026-05-04 per fleet npm-deprecation policy); no `NPM_TOKEN` required.
 
 ## Branch Protection Rules
 
