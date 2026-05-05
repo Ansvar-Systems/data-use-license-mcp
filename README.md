@@ -1,9 +1,10 @@
 # Data Use License MCP
 
-[![npm](https://img.shields.io/npm/v/@ansvar/data-use-license-mcp.svg)](https://www.npmjs.com/package/@ansvar/data-use-license-mcp)
 [![CI](https://github.com/Ansvar-Systems/data-use-license-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Ansvar-Systems/data-use-license-mcp/actions/workflows/ci.yml)
 
-MCP server providing authoritative metadata on data-use licenses, government open-data terms, legal regimes (sui generis database rights, Crown Copyright, court-decision public-domain doctrines), and vendor TOS templates. Sibling to `@ansvar/open-source-license-mcp` (which covers software/code licenses).
+MCP server providing authoritative metadata on data-use licenses, government open-data terms, legal regimes (sui generis database rights, Crown Copyright, court-decision public-domain doctrines), and vendor TOS templates. Sibling to `open-source-license-mcp` (which covers software/code licenses).
+
+> **Distribution.** Source-only via this repo (Apache-2.0). Hosted access via the Ansvar Gateway. **Not published to npm** — the `@ansvar/data-use-license-mcp` package on the npm registry is deprecated and points back here. Per [fleet npm-deprecation policy (2026-05-02)](https://github.com/Ansvar-Systems/Ansvar-Architecture-Documentation/blob/main/MEMORY.md), no `@ansvar/*-mcp` packages are published.
 
 ## Overview
 
@@ -14,12 +15,21 @@ Coverage is structured around four entity types:
 - `legal_regime` — sui generis database rights (EU 96/9/EC), Crown Copyright family, court-decision public-domain doctrines
 - `vendor_template` — Westlaw / LexisNexis / Bloomberg / Wolters Kluwer / HeinOnline TOS templates
 
-## Installation
+## Running this MCP
 
-### Via npm (stdio)
+### Via Ansvar Gateway (recommended for B2B)
+
+Use `https://gateway.ansvar.eu` with OAuth — see [gateway-deployment.md](https://github.com/Ansvar-Systems/Ansvar-Architecture-Documentation/blob/main/docs/runbooks/mcp-gateway-deployment.md). The gateway routes the `data-use-license` MCP under your `team`/`company` tier.
+
+### Self-hosted from source (stdio for local agents)
 
 ```bash
-npm install -g @ansvar/data-use-license-mcp
+git clone https://github.com/Ansvar-Systems/data-use-license-mcp.git
+cd data-use-license-mcp
+npm install
+export ATTRIBUTION_LICENSES_PATH=/path/to/Ansvar-Architecture-Documentation/infrastructure/attribution-licenses.json
+npm run build:db
+npm run build
 ```
 
 Then add to your MCP client config:
@@ -28,15 +38,21 @@ Then add to your MCP client config:
 {
   "mcpServers": {
     "data-use-license": {
-      "command": "data-use-license-mcp"
+      "command": "node",
+      "args": ["/absolute/path/to/data-use-license-mcp/dist/index.js"]
     }
   }
 }
 ```
 
-### Via Ansvar Gateway (recommended for B2B)
+### Self-hosted from source (HTTP)
 
-Use `https://gateway.ansvar.eu` with OAuth — see [gateway-deployment.md](https://github.com/Ansvar-Systems/Ansvar-Architecture-Documentation/blob/main/docs/runbooks/mcp-gateway-deployment.md).
+```bash
+npm start
+# listens on :3000, /mcp + /health
+```
+
+GHCR images at `ghcr.io/ansvar-systems/data-use-license-mcp` are private; access on request.
 
 ## Tools
 
@@ -101,15 +117,7 @@ npm run build
 npm test
 ```
 
-Run locally (stdio):
-```bash
-node dist/index.js
-```
-
-Run locally (HTTP, port 3000):
-```bash
-npm start
-```
+Both transports (stdio for `node dist/index.js`, HTTP for `npm start` on port 3000) are documented above under "Running this MCP."
 
 ## License
 
