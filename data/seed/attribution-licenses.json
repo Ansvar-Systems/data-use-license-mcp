@@ -4,49 +4,101 @@
     "url": "https://www.apache.org/licenses/LICENSE-2.0",
     "spdx": "Apache-2.0",
     "commercial_allowed": true,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": [],
+    "notes": "Software license; rare for legal-data corpora."
   },
   "CC-BY-4.0": {
     "name": "Creative Commons Attribution 4.0 International",
     "url": "https://creativecommons.org/licenses/by/4.0/",
     "spdx": "CC-BY-4.0",
     "commercial_allowed": true,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": []
   },
   "CC-BY-NC-4.0": {
     "name": "Creative Commons Attribution-NonCommercial 4.0 International",
     "url": "https://creativecommons.org/licenses/by-nc/4.0/",
     "spdx": "CC-BY-NC-4.0",
     "commercial_allowed": false,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": true,
+    "safe_for_public_ghcr": false,
+    "safe_for_commercial_serving": false,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": []
   },
   "CC-BY-NC-SA-4.0": {
     "name": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International",
     "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "spdx": "CC-BY-NC-SA-4.0",
     "commercial_allowed": false,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": true,
+    "non_commercial": true,
+    "safe_for_public_ghcr": false,
+    "safe_for_commercial_serving": false,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": []
   },
   "CC-BY-SA-4.0": {
     "name": "Creative Commons Attribution-ShareAlike 4.0 International",
     "url": "https://creativecommons.org/licenses/by-sa/4.0/",
     "spdx": "CC-BY-SA-4.0",
     "commercial_allowed": true,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": true,
+    "non_commercial": false,
+    "safe_for_public_ghcr": false,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": [],
+    "notes": "Public GHCR distribution would trigger SA obligation on the entire image; gateway-only serving avoids that."
   },
   "CC0-1.0": {
     "name": "Creative Commons Zero v1.0 Universal",
     "url": "https://creativecommons.org/publicdomain/zero/1.0/",
     "spdx": "CC0-1.0",
     "commercial_allowed": true,
-    "attribution_required": false
+    "attribution_required": false,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": []
   },
   "Crown-Copyright": {
     "name": "Crown Copyright",
     "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/",
     "spdx": null,
     "commercial_allowed": true,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": [],
+    "notes": "Default UK government works basis; in practice usually relicensed under OGL-3.0."
   },
   "Custom-Vendor": {
     "name": "Custom vendor or partnership terms",
@@ -54,14 +106,30 @@
     "spdx": null,
     "commercial_allowed": false,
     "attribution_required": true,
-    "requires_vendor_terms_url": true
+    "derivatives_allowed": false,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": false,
+    "safe_for_commercial_serving": false,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": [],
+    "requires_vendor_terms_url": true,
+    "notes": "Catch-all for sources covered by signed agreements. Per-source verdict requires a vendor terms URL plus manual review; never auto-cleared."
   },
   "EU-Decision-2011-833": {
-    "name": "European Commission reuse policy under Decision 2011/833/EU",
+    "name": "European Commission reuse policy under Decision 2011/833/EU (Commission documents)",
     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011D0833",
     "spdx": null,
     "commercial_allowed": true,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": true,
+    "geographic_restrictions": [],
+    "notes": "Use this code ONLY for Commission documents on eur-lex / europa.eu. Decentralized agencies (EMA, ECHA, EFSA, EASA, ENISA, etc.) have separate notices and MUST use a different license code. See EU-Decision-2011-833-Commission-Only for the strict variant used when the source authority is unverified."
   },
   "License-Unverified": {
     "name": "License unverified",
@@ -69,27 +137,56 @@
     "spdx": null,
     "commercial_allowed": false,
     "attribution_required": true,
-    "audit_status": "UNCLEAR"
+    "derivatives_allowed": false,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": false,
+    "safe_for_commercial_serving": false,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": [],
+    "audit_status": "UNCLEAR",
+    "notes": "Sentinel value used by the audit when sources.yml lacks evidence. Sources mapped to this code must be cleared before commercial serving."
   },
   "MIT": {
     "name": "MIT License",
     "url": "https://opensource.org/license/mit/",
     "spdx": "MIT",
     "commercial_allowed": true,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": []
   },
   "OGL-3.0": {
-    "name": "Open Government Licence v3.0",
+    "name": "Open Government Licence v3.0 (UK)",
     "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
     "spdx": "OGL-UK-3.0",
     "commercial_allowed": true,
-    "attribution_required": true
+    "attribution_required": true,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": []
   },
   "Public-Domain": {
     "name": "Public domain",
     "url": null,
     "spdx": null,
     "commercial_allowed": true,
-    "attribution_required": false
+    "attribution_required": false,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "safe_for_commercial_serving": true,
+    "applies_to_database_right_separately": false,
+    "geographic_restrictions": []
   }
 }

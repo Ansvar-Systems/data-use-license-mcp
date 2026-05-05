@@ -15,8 +15,16 @@ interface UpstreamEntry {
   spdx: string | null;
   commercial_allowed: boolean;
   attribution_required: boolean;
+  derivatives_allowed: boolean;
+  share_alike: boolean;
+  non_commercial: boolean;
+  safe_for_public_ghcr: boolean;
+  safe_for_commercial_serving: boolean;
+  applies_to_database_right_separately: boolean;
+  geographic_restrictions?: string[];
   requires_vendor_terms_url?: boolean;
   audit_status?: string;
+  notes?: string;
 }
 
 interface UpstreamCatalog {
@@ -70,10 +78,18 @@ function migrate() {
       const entity_type = classifyEntityType(code);
       const jurisdiction = classifyJurisdiction(code);
       const type_specific = JSON.stringify({
-        commercial_use_allowed: entry.commercial_allowed,
+        commercial_allowed: entry.commercial_allowed,
         attribution_required: entry.attribution_required,
+        derivatives_allowed: entry.derivatives_allowed,
+        share_alike: entry.share_alike,
+        non_commercial: entry.non_commercial,
+        safe_for_public_ghcr: entry.safe_for_public_ghcr,
+        safe_for_commercial_serving: entry.safe_for_commercial_serving,
+        applies_to_database_right_separately: entry.applies_to_database_right_separately,
+        geographic_restrictions: entry.geographic_restrictions ?? [],
         requires_vendor_terms_url: entry.requires_vendor_terms_url ?? false,
         audit_status: entry.audit_status ?? null,
+        notes: entry.notes ?? null,
       });
       const quality_tier =
         code === "License-Unverified" ? "amber" :

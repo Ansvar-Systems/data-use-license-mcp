@@ -53,13 +53,40 @@ export async function getObligations(input: GetObligationsInput): Promise<GetObl
       conditional_on: null,
     });
   }
-  if (ts.commercial_use_allowed === false) {
+  if (ts.commercial_allowed === false) {
     obligations.push({
       id: "non-commercial",
       title: "Non-commercial use only",
       text: "This license/terms restricts use to non-commercial purposes.",
       mandatory: true,
       conditional_on: null,
+    });
+  }
+  if (ts.derivatives_allowed === false) {
+    obligations.push({
+      id: "no-derivatives",
+      title: "No derivatives permitted",
+      text: "This license/terms forbids modifying, transforming, or building upon the licensed content.",
+      mandatory: true,
+      conditional_on: null,
+    });
+  }
+  if (ts.share_alike === true) {
+    obligations.push({
+      id: "share-alike",
+      title: "Share-alike obligation",
+      text: "Derivative works must be distributed under the same or a compatible license.",
+      mandatory: true,
+      conditional_on: null,
+    });
+  }
+  if (ts.applies_to_database_right_separately === true) {
+    obligations.push({
+      id: "database-right-separate",
+      title: "Database right separate from content",
+      text: "This license covers content but not EU sui generis database rights; verify database-right reuse separately.",
+      mandatory: false,
+      conditional_on: "deployment_in_eea",
     });
   }
 
