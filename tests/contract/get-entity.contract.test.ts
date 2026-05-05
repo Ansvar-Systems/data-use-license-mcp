@@ -26,4 +26,24 @@ describe("get_entity contract", () => {
     expect(out._citation).toBeNull();
     expect(out._meta).toBeDefined();
   });
+
+  it("type_specific carries the 11 policy-catalog fields", async () => {
+    const out = await getEntity({ entity_id: "cc-by-sa-4.0" });
+    const ts = out.entity?.type_specific as Record<string, unknown>;
+    for (const key of [
+      "commercial_allowed",
+      "attribution_required",
+      "derivatives_allowed",
+      "share_alike",
+      "non_commercial",
+      "safe_for_public_ghcr",
+      "safe_for_commercial_serving",
+      "applies_to_database_right_separately",
+    ]) {
+      expect(ts[key], `missing ${key} in type_specific for cc-by-sa-4.0`).toBeDefined();
+    }
+    expect(ts.share_alike).toBe(true);
+    expect(ts.safe_for_public_ghcr).toBe(false);
+    expect(ts.safe_for_commercial_serving).toBe(true);
+  });
 });
