@@ -57,4 +57,24 @@ describe("database integrity", () => {
       db.prepare("SELECT id FROM entities_fts WHERE entities_fts MATCH 'x' LIMIT 1").all();
     }).not.toThrow();
   });
+
+  it("db_metadata table exists with required keys (gate 5.3)", () => {
+    const rows = db.prepare("SELECT key, value FROM db_metadata").all() as Array<{ key: string; value: string }>;
+    const keys = new Set(rows.map((r) => r.key));
+    for (const required of ["schema_version", "built_at", "entity_count", "mcp_name", "mcp_version"]) {
+      expect(keys).toContain(required);
+    }
+  });
+
+  it("db_metadata.built_at is a valid ISO-8601 timestamp", () => {
+    const row = db.prepare("SELECT value FROM db_metadata WHERE key='built_at'").get() as { value: string };
+    expect(row.value).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/);
+    expect(Number.isFinite(Date.parse(row.value))).toBe(true);
+  });
+
+  it("db_metadata.entity_count matches actual entities table", () => {
+    const meta = db.prepare("SELECT value FROM db_metadata WHERE key='entity_count'").get() as { value: string };
+    const actual = db.prepare("SELECT COUNT(*) AS c FROM entities").get() as { c: number };
+    expect(Number(meta.value)).toBe(actual.c);
+  });
 });

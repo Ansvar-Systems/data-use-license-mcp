@@ -24,4 +24,19 @@ export const TOOLS = [
     description: "[team tier] Search vendor TOS templates (Westlaw, LexisNexis, Bloomberg, etc.).",
     inputSchema: { type: "object", properties: { query: { type: "string" }, limit: { type: "number" } }, required: ["query"] },
   },
+  {
+    name: "list_sources",
+    description: "List upstream data sources for this MCP. data-use-license is expert-curated and has no single upstream feed; this tool returns an empty source list with explanatory notes.",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false },
+  },
+  {
+    name: "about",
+    description: "Server metadata: name, version, category, item counts by entity_type, schema version, database build time.",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false },
+  },
+  {
+    name: "check_data_freshness",
+    description: "Report DB build age and refresh status (current / due / overdue). data-use-license has no upstream feed; freshness is the time since the catalog mirror was last rebuilt.",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false },
+  },
 ] as const;

@@ -93,3 +93,32 @@ export function getEdgesFor(id: string): Edge[] {
     metadata: r.metadata ? JSON.parse(r.metadata as unknown as string) : null,
   }));
 }
+
+export interface DbMetadata {
+  schema_version: string;
+  built_at: string;
+  entity_count: number;
+  mcp_name: string;
+  mcp_version: string;
+}
+
+export function getDbMetadata(): DbMetadata {
+  const rows = getDb()
+    .prepare("SELECT key, value FROM db_metadata")
+    .all() as Array<{ key: string; value: string }>;
+  const map = Object.fromEntries(rows.map((r) => [r.key, r.value]));
+  return {
+    schema_version: map.schema_version ?? "0.0",
+    built_at: map.built_at ?? new Date(0).toISOString(),
+    entity_count: Number(map.entity_count ?? 0),
+    mcp_name: map.mcp_name ?? "data-use-license",
+    mcp_version: map.mcp_version ?? "0.0.0",
+  };
+}
+
+export function getEntityCountByType(): Record<string, number> {
+  const rows = getDb()
+    .prepare("SELECT entity_type, COUNT(*) AS c FROM entities GROUP BY entity_type")
+    .all() as Array<{ entity_type: string; c: number }>;
+  return Object.fromEntries(rows.map((r) => [r.entity_type, r.c]));
+}

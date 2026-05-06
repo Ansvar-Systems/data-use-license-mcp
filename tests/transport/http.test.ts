@@ -44,8 +44,13 @@ describe('G7.3 — follow-up tools/list with same session returns tools array', 
 
     expect(list.statusCode).toBe(200);
     const tools = extractToolsArray(list.body);
-    expect(tools).toHaveLength(5);
-    expect(tools.map((t: { name: string }) => t.name)).toContain('search_entities');
+    expect(tools).toHaveLength(8);
+    const names = tools.map((t: { name: string }) => t.name);
+    expect(names).toContain('search_entities');
+    // Mandatory non-law meta-tools per golden-standard §4.1
+    expect(names).toContain('list_sources');
+    expect(names).toContain('about');
+    expect(names).toContain('check_data_freshness');
   });
 });
 

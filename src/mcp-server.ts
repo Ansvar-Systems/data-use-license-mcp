@@ -5,6 +5,9 @@ import { getEntity, getEntityInputSchema } from "./tools/get-entity.js";
 import { checkCompatibility, checkCompatibilityInputSchema } from "./tools/check-compatibility.js";
 import { getObligations, getObligationsInputSchema } from "./tools/get-obligations.js";
 import { searchVendorTemplates, searchVendorTemplatesInputSchema } from "./tools/search-vendor-templates.js";
+import { listSources, listSourcesInputSchema } from "./tools/list-sources.js";
+import { about, aboutInputSchema } from "./tools/about.js";
+import { checkDataFreshness, checkDataFreshnessInputSchema } from "./tools/check-data-freshness.js";
 import { TOOLS } from "./tool-definitions.js";
 
 export const SERVER_NAME = "data-use-license-mcp";
@@ -31,6 +34,12 @@ export function createMcpServer(): Server {
         return { content: [{ type: "text", text: JSON.stringify(await getObligations(getObligationsInputSchema.parse(args))) }] };
       case "search_vendor_templates":
         return { content: [{ type: "text", text: JSON.stringify(await searchVendorTemplates(searchVendorTemplatesInputSchema.parse(args))) }] };
+      case "list_sources":
+        return { content: [{ type: "text", text: JSON.stringify(await listSources(listSourcesInputSchema.parse(args ?? {}))) }] };
+      case "about":
+        return { content: [{ type: "text", text: JSON.stringify(await about(aboutInputSchema.parse(args ?? {}))) }] };
+      case "check_data_freshness":
+        return { content: [{ type: "text", text: JSON.stringify(await checkDataFreshness(checkDataFreshnessInputSchema.parse(args ?? {}))) }] };
       default:
         throw new Error(`Unknown tool: ${name}`);
     }
