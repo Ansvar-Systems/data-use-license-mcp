@@ -13,12 +13,11 @@ describe("citation shape — Gate 13 contract", () => {
     }
   });
 
-  it("search_entities items have license code in registered allowed_licenses", async () => {
-    const allowed = new Set([
-      "CC0-1.0", "CC-BY-4.0", "OGL-3.0", "Apache-2.0",
-      "EU-Decision-2011-833", "Public-Domain", "Custom-Vendor", "License-Unverified",
-      "CC-BY-SA-4.0", "CC-BY-ND-4.0",
-    ]);
+  it("search_entities items have license code matching manifest allowed_licenses", async () => {
+    // Catalog rows are Apache-2.0; vendor_template rows are Custom-Vendor.
+    // No other licenses appear — the source_url is a verification pointer,
+    // not a re-licensing claim. Must match manifest.attribution.allowed_licenses.
+    const allowed = new Set(["Apache-2.0", "Custom-Vendor"]);
     const out = await searchEntities({ query: "MIT" });
     for (const r of out.results) {
       expect(allowed.has(r._citation.license)).toBe(true);

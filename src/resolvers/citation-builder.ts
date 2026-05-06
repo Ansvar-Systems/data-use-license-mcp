@@ -1,32 +1,49 @@
 // src/resolvers/citation-builder.ts
 import type { Entity, Citation } from "../types.js";
 
-const PUBLISHER_BY_DOMAIN: Record<string, { publisher: string; license: string }> = {
-  "opensource.org": { publisher: "opensource.org", license: "CC0-1.0" },
-  "spdx.org": { publisher: "spdx.org", license: "CC0-1.0" },
-  "creativecommons.org": { publisher: "creativecommons.org", license: "CC0-1.0" },
-  "opendatacommons.org": { publisher: "opendatacommons.org", license: "CC-BY-SA-4.0" },
-  "nationalarchives.gov.uk": { publisher: "nationalarchives.gov.uk", license: "OGL-3.0" },
-  "data.norge.no": { publisher: "data.norge.no", license: "CC-BY-4.0" },
-  "etalab.gouv.fr": { publisher: "etalab.gouv.fr", license: "CC-BY-4.0" },
-  "govdata.de": { publisher: "govdata.de", license: "CC-BY-4.0" },
-  "dati.gov.it": { publisher: "dati.gov.it", license: "CC-BY-4.0" },
-  "joinup.ec.europa.eu": { publisher: "joinup.ec.europa.eu", license: "EU-Decision-2011-833" },
-  "fsf.org": { publisher: "fsf.org", license: "CC-BY-ND-4.0" },
+// Map from authority-text host → canonical publisher display name. Used only
+// for the `publisher` and `display_text` fields. The catalog itself is
+// Apache-2.0 — every citation's `license` is the catalog license, not the
+// upstream authority's license. The `source_url` field is a verification
+// pointer back to the canonical authority text, not a re-licensing claim.
+const PUBLISHER_BY_DOMAIN: Record<string, string> = {
+  "opensource.org": "opensource.org",
+  "spdx.org": "spdx.org",
+  "creativecommons.org": "creativecommons.org",
+  "opendatacommons.org": "opendatacommons.org",
+  "nationalarchives.gov.uk": "nationalarchives.gov.uk",
+  "data.norge.no": "data.norge.no",
+  "etalab.gouv.fr": "etalab.gouv.fr",
+  "govdata.de": "govdata.de",
+  "dati.gov.it": "dati.gov.it",
+  "joinup.ec.europa.eu": "joinup.ec.europa.eu",
+  "fsf.org": "fsf.org",
 };
 
-function publisherFromUrl(url: string | null): { publisher: string; license: string } {
-  if (!url) return { publisher: "Ansvar", license: "Apache-2.0" };
+const CATALOG_LICENSE = "Apache-2.0";
+const VENDOR_TEMPLATE_LICENSE = "Custom-Vendor";
+
+function publisherFromUrl(url: string | null): string {
+  if (!url) return "Ansvar";
   try {
     const host = new URL(url).hostname.replace(/^www\./, "");
-    return PUBLISHER_BY_DOMAIN[host] ?? { publisher: host, license: "License-Unverified" };
+    return PUBLISHER_BY_DOMAIN[host] ?? host;
   } catch {
-    return { publisher: "Ansvar", license: "Apache-2.0" };
+    return "Ansvar";
   }
 }
 
+function citationLicenseFor(entity: Entity): string {
+  // Vendor templates are reference rows describing commercial vendor TOS.
+  // They carry the Custom-Vendor sentinel to signal that bilateral contractual
+  // terms apply downstream of this catalog row.
+  if (entity.entity_type === "vendor_template") return VENDOR_TEMPLATE_LICENSE;
+  return CATALOG_LICENSE;
+}
+
 export function buildCitation(entity: Entity): Citation {
-  const { publisher, license } = publisherFromUrl(entity.official_text_url);
+  const publisher = publisherFromUrl(entity.official_text_url);
+  const license = citationLicenseFor(entity);
   return {
     source_url: entity.official_text_url,
     publisher,
@@ -37,7 +54,7 @@ export function buildCitation(entity: Entity): Citation {
       : `${entity.name} (${publisher})`,
     lookup: { tool: "get_entity", args: { entity_id: entity.id } },
     attribution_text: entity.official_text_url
-      ? `Reproduced from ${publisher} under ${license}.`
+      ? `Catalog row reproduced under ${license}; verify against ${publisher}.`
       : null,
   };
 }
