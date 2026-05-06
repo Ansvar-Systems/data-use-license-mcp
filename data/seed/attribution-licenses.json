@@ -1,5 +1,6 @@
 {
   "AGPL-3.0-only": {
+    "entry_kind": "license",
     "name": "GNU Affero General Public License v3.0 only",
     "url": "https://www.gnu.org/licenses/agpl-3.0.html",
     "spdx": "AGPL-3.0-only",
@@ -16,6 +17,7 @@
     "notes": "Network share-alike (AGPL section 13) triggers on SaaS use; ingesting forces the entire gateway path to AGPL-3.0. Default-RED per Phase 1B-2 categorization. Per ADR-030, GPL-N-or-later sources NEVER auto-elect to AGPL-3.0; intentional AGPL ingestion requires an explicit ADR exception."
   },
   "Apache-2.0": {
+    "entry_kind": "license",
     "name": "Apache License 2.0",
     "url": "https://www.apache.org/licenses/LICENSE-2.0",
     "spdx": "Apache-2.0",
@@ -31,6 +33,7 @@
     "notes": "Software license; rare for legal-data corpora."
   },
   "BSD-2-Clause": {
+    "entry_kind": "license",
     "name": "BSD 2-Clause Simplified License",
     "url": "https://opensource.org/licenses/BSD-2-Clause",
     "spdx": "BSD-2-Clause",
@@ -46,6 +49,7 @@
     "notes": "Permissive software license. Notice and warranty disclaimer must be reproduced in derivative works."
   },
   "BSD-3-Clause": {
+    "entry_kind": "license",
     "name": "BSD 3-Clause New or Revised License",
     "url": "https://opensource.org/licenses/BSD-3-Clause",
     "spdx": "BSD-3-Clause",
@@ -61,6 +65,7 @@
     "notes": "Permissive software license. Adds a no-endorsement clause beyond BSD-2-Clause; this is a use-restriction on names and marks rather than an attribution duty."
   },
   "Bloomberg-Law-TOS": {
+    "entry_kind": "vendor_template",
     "name": "Bloomberg Law Standard Terms of Service",
     "url": "https://www.bloomberglaw.com/product/blaw/page/terms_of_service",
     "spdx": null,
@@ -78,6 +83,7 @@
     "notes": "Subscription-only legal-research platform from Bloomberg. Standard terms forbid redistribution and derivative use. Reference row only \u2014 sources declaring this license are refused at the audit gate."
   },
   "CC-BY-3.0": {
+    "entry_kind": "license",
     "name": "Creative Commons Attribution 3.0",
     "url": "https://creativecommons.org/licenses/by/3.0/",
     "spdx": "CC-BY-3.0",
@@ -93,6 +99,7 @@
     "notes": "Pre-4.0 CC-BY; 3.0 ports do not waive sui generis database rights in the EU."
   },
   "CC-BY-4.0": {
+    "entry_kind": "license",
     "name": "Creative Commons Attribution 4.0 International",
     "url": "https://creativecommons.org/licenses/by/4.0/",
     "spdx": "CC-BY-4.0",
@@ -107,6 +114,7 @@
     "geographic_restrictions": []
   },
   "CC-BY-NC-4.0": {
+    "entry_kind": "license",
     "name": "Creative Commons Attribution-NonCommercial 4.0 International",
     "url": "https://creativecommons.org/licenses/by-nc/4.0/",
     "spdx": "CC-BY-NC-4.0",
@@ -121,6 +129,7 @@
     "geographic_restrictions": []
   },
   "CC-BY-NC-SA-4.0": {
+    "entry_kind": "license",
     "name": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International",
     "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     "spdx": "CC-BY-NC-SA-4.0",
@@ -135,6 +144,7 @@
     "geographic_restrictions": []
   },
   "CC-BY-ND-4.0": {
+    "entry_kind": "license",
     "name": "Creative Commons Attribution-NoDerivatives 4.0 International",
     "url": "https://creativecommons.org/licenses/by-nd/4.0/",
     "spdx": "CC-BY-ND-4.0",
@@ -150,6 +160,7 @@
     "notes": "Container images are derivative works under most readings; flag affects gov.br sub-portals (ANPD/CGU/COAF/CVM/SUSEP) per 2026-05-02 finding."
   },
   "CC-BY-SA-4.0": {
+    "entry_kind": "license",
     "name": "Creative Commons Attribution-ShareAlike 4.0 International",
     "url": "https://creativecommons.org/licenses/by-sa/4.0/",
     "spdx": "CC-BY-SA-4.0",
@@ -165,6 +176,7 @@
     "notes": "Public GHCR distribution would trigger SA obligation on the entire image; gateway-only serving avoids that."
   },
   "CC0-1.0": {
+    "entry_kind": "license",
     "name": "Creative Commons Zero v1.0 Universal",
     "url": "https://creativecommons.org/publicdomain/zero/1.0/",
     "spdx": "CC0-1.0",
@@ -179,6 +191,7 @@
     "geographic_restrictions": []
   },
   "Crown-Copyright": {
+    "entry_kind": "regime",
     "name": "Crown Copyright",
     "url": "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/",
     "spdx": null,
@@ -194,6 +207,7 @@
     "notes": "Default UK government works basis; in practice usually relicensed under OGL-3.0."
   },
   "Custom-Vendor": {
+    "entry_kind": "vendor_template",
     "name": "Custom vendor or partnership terms",
     "url": null,
     "spdx": null,
@@ -210,6 +224,7 @@
     "notes": "Catch-all for sources covered by signed agreements. Per-source verdict requires a vendor terms URL plus manual review; never auto-cleared."
   },
   "Cyprus-PSI": {
+    "entry_kind": "terms",
     "name": "Cyprus public-sector information re-use under Law 143(I)/2021 (transposing EU Directive 2019/1024 on Open Data and re-use of public sector information; Article 8 mandates commercial re-use)",
     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32019L1024",
     "spdx": null,
@@ -225,6 +240,7 @@
     "notes": "EU PSI Directive 2019/1024 mandates commercial re-use under Article 8. Cypriot transposition Law 143(I)/2021 follows the directive's terms. Sui generis database right may apply separately to compilations."
   },
   "DL-DE-BY-2.0": {
+    "entry_kind": "terms",
     "name": "Datenlizenz Deutschland - Namensnennung - Version 2.0",
     "url": "https://www.govdata.de/dl-de/by-2-0",
     "spdx": "DL-DE-BY-2.0",
@@ -240,6 +256,7 @@
     "notes": "German government open-data license with attribution. CC-BY-equivalent shape; addresses both content rights and PSI Directive scope so no separate database-rights evidence needed. Default license for govdata.de and many federal/state German open-data portals."
   },
   "DL-DE-Zero-2.0": {
+    "entry_kind": "terms",
     "name": "Datenlizenz Deutschland - Zero - Version 2.0",
     "url": "https://www.govdata.de/dl-de/zero-2-0",
     "spdx": "DL-DE-Zero-2.0",
@@ -254,7 +271,27 @@
     "geographic_restrictions": [],
     "notes": "German government open-data dedication with no attribution requirement. CC0-equivalent shape. Used for German government data published as full waiver."
   },
+  "EU-Database-Directive": {
+    "entry_kind": "regime",
+    "name": "Directive 96/9/EC on the legal protection of databases (sui generis right)",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:31996L0009",
+    "spdx": null,
+    "commercial_allowed": false,
+    "attribution_required": false,
+    "derivatives_allowed": false,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": false,
+    "default_allowed_for_commercial_serving": false,
+    "database_rights_evidence_required": true,
+    "geographic_restrictions": [
+      "EU"
+    ],
+    "audit_status": "AMBER",
+    "notes": "Sui generis right protects substantial investment in obtaining, verifying, or presenting database contents. Independent of content copyright. Reference row for negative-matching: a source whose database content qualifies for sui generis protection requires separate clearance before commercial use, regardless of the underlying content license. Not itself a permission grant. Geographic scope: EU/EEA member states."
+  },
   "EU-Decision-2011-833": {
+    "entry_kind": "terms",
     "name": "European Commission reuse policy under Decision 2011/833/EU (Commission documents)",
     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011D0833",
     "spdx": null,
@@ -270,6 +307,7 @@
     "notes": "Use this code ONLY for Commission documents on eur-lex / europa.eu. Decentralized agencies (EMA, ECHA, EFSA, EASA, ENISA, etc.) have separate notices and MUST use a different license code. See EU-Decision-2011-833-Commission-Only for the strict variant used when the source authority is unverified."
   },
   "EU-Decision-2011-833-Commission-Only": {
+    "entry_kind": "terms",
     "name": "EU Decision 2011/833/EU restricted to Commission documents",
     "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011D0833",
     "spdx": null,
@@ -286,6 +324,7 @@
     "notes": "Strict variant for sources whose Commission-vs-decentralized-agency status is not yet verified. Per 2026-05-02 EMA finding, decentralized agencies are NOT covered by Decision 2011/833/EU. Mappings using this code stay AMBER until source-authority registry confirms Commission status."
   },
   "Etalab-2.0": {
+    "entry_kind": "terms",
     "name": "Open Licence 2.0 (Etalab)",
     "url": "https://www.etalab.gouv.fr/licence-ouverte-open-licence/",
     "spdx": "etalab-2.0",
@@ -300,7 +339,27 @@
     "geographic_restrictions": [],
     "notes": "French public-sector data. Compatible with CC-BY 2.0+. Default for legifrance.gouv.fr open-data exports."
   },
+  "French-CPI-L122-5": {
+    "entry_kind": "regime",
+    "name": "French Code de la propriete intellectuelle Article L122-5",
+    "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037388886/",
+    "spdx": null,
+    "commercial_allowed": true,
+    "attribution_required": false,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "default_allowed_for_commercial_serving": true,
+    "database_rights_evidence_required": true,
+    "geographic_restrictions": [
+      "FR"
+    ],
+    "audit_status": "GREEN",
+    "notes": "French Code de la propriete intellectuelle Article L122-5: limitations on copyright. Combined with L131-2, official acts (lois, decrets, jurisprudence, debats parlementaires) are excluded from copyright protection. Most French legal corpora rely on this regime for the underlying content; attribution is customary even when not legally required. Sui generis database rights may still apply on aggregations."
+  },
   "GPL-2.0-only": {
+    "entry_kind": "license",
     "name": "GNU General Public License v2.0 only",
     "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
     "spdx": "GPL-2.0-only",
@@ -317,6 +376,7 @@
     "notes": "Strong copyleft. Incompatible with the platform's Apache-2.0 codebase; ingesting forces image-wide GPL-2.0. Per ADR-030, GPL-2.0-or-later sources elect to GPL-3.0-only when v3 is platform-compatible. Default-deny on commercial serving per share-alike rule (license-catalog-maintenance.md item 5)."
   },
   "GPL-3.0-only": {
+    "entry_kind": "license",
     "name": "GNU General Public License v3.0 only",
     "url": "https://www.gnu.org/licenses/gpl-3.0.html",
     "spdx": "GPL-3.0-only",
@@ -332,7 +392,27 @@
     "audit_status": "AMBER",
     "notes": "Strong copyleft. Apache-2.0 code can be combined into GPL-3.0 work, but not the reverse. Default-deny on commercial serving per share-alike rule. Default election target for GPL-N-or-later sources per ADR-030."
   },
+  "German-UrhG-Section-5": {
+    "entry_kind": "regime",
+    "name": "German UrhG Section 5 - laws, decisions, official notices",
+    "url": "https://www.gesetze-im-internet.de/urhg/__5.html",
+    "spdx": null,
+    "commercial_allowed": true,
+    "attribution_required": false,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "default_allowed_for_commercial_serving": true,
+    "database_rights_evidence_required": true,
+    "geographic_restrictions": [
+      "DE"
+    ],
+    "audit_status": "GREEN",
+    "notes": "German Urheberrechtsgesetz Section 5: laws, ordinances, official decrees, court decisions, and official notices are not protected by copyright. Section 5(2) extends to other official works in the public interest, with attribution conditions. Sui generis database rights may still apply when these works are aggregated into a substantial database (database_rights_evidence_required=true)."
+  },
   "HeinOnline-TOS": {
+    "entry_kind": "vendor_template",
     "name": "HeinOnline Standard Terms of Service",
     "url": "https://heinonline.org/HOL/SubscriberAgreement",
     "spdx": null,
@@ -350,6 +430,7 @@
     "notes": "Subscription-only academic legal database from William S. Hein & Co. Standard terms forbid bulk download and redistribution. Reference row only \u2014 sources declaring this license are refused at the audit gate."
   },
   "IODL-2.0": {
+    "entry_kind": "terms",
     "name": "Italian Open Data License v2.0",
     "url": "https://www.dati.gov.it/iodl/2.0/",
     "spdx": "IODL-2.0",
@@ -365,6 +446,7 @@
     "notes": "Italian government open-data license with attribution. CC-BY-equivalent shape. v2.0 dropped the share-alike requirement that v1.0 had, aligning with international permissive open-data convention. Default license for dati.gov.it."
   },
   "ISC": {
+    "entry_kind": "license",
     "name": "ISC License",
     "url": "https://opensource.org/licenses/ISC",
     "spdx": "ISC",
@@ -379,7 +461,27 @@
     "geographic_restrictions": [],
     "notes": "Permissive software license; functionally MIT-equivalent. Used by OpenBSD, npm, and many Node packages."
   },
+  "Italian-LDA-Article-5": {
+    "entry_kind": "regime",
+    "name": "Italian Legge 633/1941 (LDA) Article 5 - official works exemption",
+    "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1941-04-22;633!vig=",
+    "spdx": null,
+    "commercial_allowed": true,
+    "attribution_required": false,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "default_allowed_for_commercial_serving": true,
+    "database_rights_evidence_required": true,
+    "geographic_restrictions": [
+      "IT"
+    ],
+    "audit_status": "GREEN",
+    "notes": "Italian Legge sul diritto d'autore (Legge 22 aprile 1941 n. 633) Article 5: official acts of the Italian State and of public administrations, decisions of judicial authorities, official documents and similar are exempt from copyright protection. Sui generis database rights may still apply on aggregated databases of these works."
+  },
   "Justia-TOS": {
+    "entry_kind": "vendor_template",
     "name": "Justia Standard Terms of Service",
     "url": "https://www.justia.com/terms-of-service/",
     "spdx": null,
@@ -397,6 +499,7 @@
     "notes": "Mixed content surface: Justia publishes both vendor-licensed editorial content (RED \u2014 covered by these standard terms) and freely available primary sources such as US court opinions and statutes (which are PD-by-statute under 17 USC 105, captured via US-Federal-PD or Public-Domain rows). Reference row covers the vendor-restricted layer; per-source review must determine which layer a given Justia URL falls under. Default-deny at the audit gate; route through US-Federal-PD or Public-Domain when the source is verifiably PD-by-statute."
   },
   "LGPL-2.1-only": {
+    "entry_kind": "license",
     "name": "GNU Lesser General Public License v2.1 only",
     "url": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html",
     "spdx": "LGPL-2.1-only",
@@ -413,6 +516,7 @@
     "notes": "Library-targeted weaker copyleft. The static-vs-dynamic linking distinction often collapses in container contexts; treated as full copyleft for fleet purposes. Per ADR-030, LGPL-2.1-or-later sources elect to LGPL-3.0-only when v3 is platform-compatible."
   },
   "LGPL-3.0-only": {
+    "entry_kind": "license",
     "name": "GNU Lesser General Public License v3.0 only",
     "url": "https://www.gnu.org/licenses/lgpl-3.0.html",
     "spdx": "LGPL-3.0-only",
@@ -429,6 +533,7 @@
     "notes": "Library-targeted weaker copyleft, plus GPL-3.0 anti-tivoization clause. Default election target for LGPL-N-or-later sources per ADR-030."
   },
   "LO-OL-Luxembourg": {
+    "entry_kind": "terms",
     "name": "Licence Ouverte / Open Licence (Luxembourg)",
     "url": "https://data.public.lu/fr/pages/donnees-ouvertes/",
     "spdx": "LO-OL-Luxembourg",
@@ -445,6 +550,7 @@
     "notes": "Luxembourg open-data license, modeled on the French Etalab licence. Verify current text version against data.public.lu before relying on for new ingestions; AMBER reflects version-string uncertainty, not licensing concern."
   },
   "LexisNexis-TOS": {
+    "entry_kind": "vendor_template",
     "name": "LexisNexis Standard Terms of Service",
     "url": "https://www.lexisnexis.com/en-us/terms/general/default.page",
     "spdx": null,
@@ -462,6 +568,7 @@
     "notes": "Subscription-only legal-research platform from RELX. Standard terms forbid bulk download, automated scraping, redistribution, and competitive use. Reference row only \u2014 sources declaring this license are refused at the audit gate."
   },
   "License-Unverified": {
+    "entry_kind": "license",
     "name": "License unverified",
     "url": null,
     "spdx": null,
@@ -478,6 +585,7 @@
     "notes": "Sentinel value used by the audit when sources.yml lacks evidence. Sources mapped to this code must be cleared before commercial serving."
   },
   "MIT": {
+    "entry_kind": "license",
     "name": "MIT License",
     "url": "https://opensource.org/license/mit/",
     "spdx": "MIT",
@@ -492,6 +600,7 @@
     "geographic_restrictions": []
   },
   "MPL-2.0": {
+    "entry_kind": "license",
     "name": "Mozilla Public License 2.0",
     "url": "https://www.mozilla.org/en-US/MPL/2.0/",
     "spdx": "MPL-2.0",
@@ -507,6 +616,7 @@
     "notes": "File-level copyleft. Compatible with Apache-2.0 and GPL. Modifications to MPL-licensed files carry the share-alike, but the platform can ship MPL-2.0 files alongside Apache-2.0 without infecting the whole image. share_alike=true reflects the file-level obligation; both safety flags remain true because the obligation does not propagate to the gateway path under default serving."
   },
   "NLOD-2.0": {
+    "entry_kind": "terms",
     "name": "Norwegian Licence for Open Government Data 2.0",
     "url": "https://data.norge.no/nlod/en/2.0/",
     "spdx": "NLOD-2.0",
@@ -522,6 +632,7 @@
     "notes": "Default Norwegian open-government licence. Does NOT cover Lovdata content (Lovdata Terms \u00a72.1 prohibits scraping). See banned-scrape-sources.yml entry lovdata-no."
   },
   "Norwegian-Court-Publication": {
+    "entry_kind": "regime",
     "name": "Norwegian court decision (officially published, copyright-exempt under \u00e5ndsverkloven \u00a714, Supreme Court pre-anonymized post-2021)",
     "url": "https://www.domstol.no/no/hoyesterett/VERKTOY/avidentifisering/",
     "spdx": null,
@@ -537,6 +648,7 @@
     "notes": "Officially published Norwegian court decisions are copyright-exempt under \u00e5ndsverkloven \u00a714. Supreme Court decisions are pre-anonymized post-2021 by the court itself. Attribution to the court is recommended professional practice though not legally mandated by the \u00a714 exemption."
   },
   "ODC-By-1.0": {
+    "entry_kind": "license",
     "name": "Open Data Commons Attribution License v1.0",
     "url": "https://opendatacommons.org/licenses/by/1-0/",
     "spdx": "ODC-By-1.0",
@@ -552,6 +664,7 @@
     "notes": "Database attribution license; permissive equivalent for databases (no share-alike). Addresses both content rights and the EU sui generis database right, so no separate database-rights evidence is required."
   },
   "ODbL-1.0": {
+    "entry_kind": "license",
     "name": "Open Database License v1.0",
     "url": "https://opendatacommons.org/licenses/odbl/1-0/",
     "spdx": "ODbL-1.0",
@@ -568,6 +681,7 @@
     "notes": "Database-level share-alike: derivative databases must be ODbL. Ingesting forces any aggregated Ansvar corpus including ODbL data to itself be ODbL, requiring partition. Used by OpenStreetMap. database_rights_evidence_required=false because ODbL itself addresses both content rights and the EU sui generis database right."
   },
   "OGL-3.0": {
+    "entry_kind": "terms",
     "name": "Open Government Licence v3.0 (UK)",
     "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
     "spdx": "OGL-UK-3.0",
@@ -582,6 +696,7 @@
     "geographic_restrictions": []
   },
   "OGL-Canada-2.0": {
+    "entry_kind": "terms",
     "name": "Open Government Licence - Canada 2.0",
     "url": "https://open.canada.ca/en/open-government-licence-canada",
     "spdx": "OGL-Canada-2.0",
@@ -597,6 +712,7 @@
     "notes": "Canadian federal Open Government Licence v2.0. OGL-equivalent shape; default license for Government of Canada open-data portal (open.canada.ca). Provincial OGL variants (e.g. OGL-Ontario, OGL-BC) are separate licenses requiring their own catalog rows if ingested."
   },
   "OGL-UK-2.0": {
+    "entry_kind": "terms",
     "name": "Open Government Licence v2.0 (UK)",
     "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/",
     "spdx": "OGL-UK-2.0",
@@ -611,6 +727,7 @@
     "geographic_restrictions": []
   },
   "PDDL-1.0": {
+    "entry_kind": "license",
     "name": "Open Data Commons Public Domain Dedication and License v1.0",
     "url": "https://opendatacommons.org/licenses/pddl/1-0/",
     "spdx": "PDDL-1.0",
@@ -626,6 +743,7 @@
     "notes": "Public domain dedication for databases. Waives both content rights and the EU sui generis database right. CC0-equivalent for databases."
   },
   "Practical-Law-TOS": {
+    "entry_kind": "vendor_template",
     "name": "Practical Law / Thomson Reuters Standard Terms of Service",
     "url": "https://uk.practicallaw.thomsonreuters.com/Browse/Home/About/AboutPracticalLaw",
     "spdx": null,
@@ -643,6 +761,7 @@
     "notes": "Subscription-only legal know-how and template platform from Thomson Reuters. Standard terms forbid redistribution and derivative use. Reference row only \u2014 sources declaring this license are refused at the audit gate."
   },
   "Public-Domain": {
+    "entry_kind": "regime",
     "name": "Public domain",
     "url": null,
     "spdx": null,
@@ -656,7 +775,27 @@
     "database_rights_evidence_required": false,
     "geographic_restrictions": []
   },
+  "Spanish-LPI-Article-13": {
+    "entry_kind": "regime",
+    "name": "Spanish Ley de Propiedad Intelectual Article 13 - official works exemption",
+    "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1996-8930",
+    "spdx": null,
+    "commercial_allowed": true,
+    "attribution_required": false,
+    "derivatives_allowed": true,
+    "share_alike": false,
+    "non_commercial": false,
+    "safe_for_public_ghcr": true,
+    "default_allowed_for_commercial_serving": true,
+    "database_rights_evidence_required": true,
+    "geographic_restrictions": [
+      "ES"
+    ],
+    "audit_status": "GREEN",
+    "notes": "Spanish Ley de Propiedad Intelectual (Real Decreto Legislativo 1/1996) Article 13: legal or regulatory provisions, drafts, decisions of judicial authorities, acts and resolutions of public bodies, and official translations of these are not subject to intellectual property protection. Sui generis database rights may still apply on aggregations."
+  },
   "US-Federal-PD": {
+    "entry_kind": "regime",
     "name": "United States federal government work, public domain (17 USC \u00a7105)",
     "url": "https://www.law.cornell.edu/uscode/text/17/105",
     "spdx": null,
@@ -672,6 +811,7 @@
     "notes": "Statutory PD inside the US. Status outside the US varies but is generally treated as PD by Berne member states for federal works."
   },
   "Unlicense": {
+    "entry_kind": "license",
     "name": "The Unlicense",
     "url": "https://unlicense.org/",
     "spdx": "Unlicense",
@@ -687,6 +827,7 @@
     "notes": "Public domain dedication for code; CC0-equivalent for software. Some jurisdictions do not recognize public-domain dedication for copyrightable works (notably FSF commentary), but the Unlicense's MIT-style permissive fallback covers operational use."
   },
   "Westlaw-TOS": {
+    "entry_kind": "vendor_template",
     "name": "Westlaw / Thomson Reuters Standard Terms of Service",
     "url": "https://legal.thomsonreuters.com/en/policies/online-terms-of-use",
     "spdx": null,
@@ -704,6 +845,7 @@
     "notes": "Subscription-only legal-research platform. Standard terms forbid bulk download, redistribution, derivative products, and competitive use. Reference row only \u2014 sources declaring this license are refused at the audit gate. Catalog presence supports negative-matching for compliance review (\"is this content under a known restrictive vendor template?\")."
   },
   "WoltersKluwer-TOS": {
+    "entry_kind": "vendor_template",
     "name": "Wolters Kluwer Standard Terms of Service",
     "url": "https://www.wolterskluwer.com/en/solutions/cheetah/terms-conditions",
     "spdx": null,
@@ -721,6 +863,7 @@
     "notes": "Subscription-only legal-research platform (Cheetah and related Wolters Kluwer products). Standard terms forbid redistribution and derivative use. Reference row only \u2014 sources declaring this license are refused at the audit gate."
   },
   "vLex-TOS": {
+    "entry_kind": "vendor_template",
     "name": "vLex Standard Terms of Service",
     "url": "https://vlex.com/legal-notice",
     "spdx": null,

@@ -61,6 +61,14 @@ const ENTITY_TYPE_OVERRIDES: Record<string, "license" | "terms" | "legal_regime"
   "Westlaw-TOS": "vendor_template",
   "WoltersKluwer-TOS": "vendor_template",
   "vLex-TOS": "vendor_template",
+  // Phase 1B-2 Group 5 regimes (PR-F arch-docs #384). Catalog uses
+  // entry_kind=regime; MCP entity_type uses legal_regime — mapped here
+  // until Phase 3 of ADR-031 reads entry_kind directly from catalog.
+  "EU-Database-Directive": "legal_regime",
+  "French-CPI-L122-5": "legal_regime",
+  "German-UrhG-Section-5": "legal_regime",
+  "Italian-LDA-Article-5": "legal_regime",
+  "Spanish-LPI-Article-13": "legal_regime",
 };
 
 const JURISDICTION_OVERRIDES: Record<string, string> = {
@@ -79,6 +87,12 @@ const JURISDICTION_OVERRIDES: Record<string, string> = {
   "IODL-2.0": "IT",
   "LO-OL-Luxembourg": "LU",
   "OGL-Canada-2.0": "CA",
+  // Phase 1B-2 Group 5 regime jurisdictions
+  "EU-Database-Directive": "EU",
+  "French-CPI-L122-5": "FR",
+  "German-UrhG-Section-5": "DE",
+  "Italian-LDA-Article-5": "IT",
+  "Spanish-LPI-Article-13": "ES",
 };
 
 function classifyEntityType(code: string): "license" | "terms" | "legal_regime" | "vendor_template" {
