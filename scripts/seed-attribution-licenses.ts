@@ -48,6 +48,19 @@ const ENTITY_TYPE_OVERRIDES: Record<string, "license" | "terms" | "legal_regime"
   "NLOD-2.0": "terms",
   "OGL-3.0": "terms",
   "OGL-UK-2.0": "terms",
+  "DL-DE-BY-2.0": "terms",
+  "DL-DE-Zero-2.0": "terms",
+  "IODL-2.0": "terms",
+  "LO-OL-Luxembourg": "terms",
+  "OGL-Canada-2.0": "terms",
+  "Bloomberg-Law-TOS": "vendor_template",
+  "HeinOnline-TOS": "vendor_template",
+  "Justia-TOS": "vendor_template",
+  "LexisNexis-TOS": "vendor_template",
+  "Practical-Law-TOS": "vendor_template",
+  "Westlaw-TOS": "vendor_template",
+  "WoltersKluwer-TOS": "vendor_template",
+  "vLex-TOS": "vendor_template",
 };
 
 const JURISDICTION_OVERRIDES: Record<string, string> = {
@@ -61,6 +74,11 @@ const JURISDICTION_OVERRIDES: Record<string, string> = {
   "NLOD-2.0": "NO",
   "Norwegian-Court-Publication": "NO",
   "US-Federal-PD": "US",
+  "DL-DE-BY-2.0": "DE",
+  "DL-DE-Zero-2.0": "DE",
+  "IODL-2.0": "IT",
+  "LO-OL-Luxembourg": "LU",
+  "OGL-Canada-2.0": "CA",
 };
 
 function classifyEntityType(code: string): "license" | "terms" | "legal_regime" | "vendor_template" {
