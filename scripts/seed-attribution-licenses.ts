@@ -61,6 +61,23 @@ const ENTITY_TYPE_OVERRIDES: Record<string, "license" | "terms" | "legal_regime"
   "Westlaw-TOS": "vendor_template",
   "WoltersKluwer-TOS": "vendor_template",
   "vLex-TOS": "vendor_template",
+  // Phase 1B-2 Group 5 regimes (PR-F arch-docs #384). Catalog uses
+  // entry_kind=regime; MCP entity_type uses legal_regime — mapped here
+  // until Phase 3 of ADR-031 reads entry_kind directly from catalog.
+  "EU-Database-Directive": "legal_regime",
+  "French-CPI-L122-5": "legal_regime",
+  "German-UrhG-Section-5": "legal_regime",
+  "Italian-LDA-Article-5": "legal_regime",
+  "Spanish-LPI-Article-13": "legal_regime",
+  // Czech statutory PD regime (arch-docs PR #390 czech-law fork-A)
+  "Czech-Statutory-PD": "legal_regime",
+  // Phase 1B-2 Group 4 AMBER (PR-E2 arch-docs #388) — bespoke gov terms
+  "Flanders-MGH-1.0": "terms",
+  "HK-DataGov-TOS": "terms",
+  "KOGL-Type-1": "terms",
+  "Singapore-OGL-1.0": "terms",
+  // Phase 1B-2 Group 4 UNCLEAR triage (PR-K arch-docs #389) — Romanian bespoke
+  "OGL-ROU-1.0": "terms",
 };
 
 const JURISDICTION_OVERRIDES: Record<string, string> = {
@@ -79,6 +96,21 @@ const JURISDICTION_OVERRIDES: Record<string, string> = {
   "IODL-2.0": "IT",
   "LO-OL-Luxembourg": "LU",
   "OGL-Canada-2.0": "CA",
+  // Phase 1B-2 Group 5 regime jurisdictions
+  "EU-Database-Directive": "EU",
+  "French-CPI-L122-5": "FR",
+  "German-UrhG-Section-5": "DE",
+  "Italian-LDA-Article-5": "IT",
+  "Spanish-LPI-Article-13": "ES",
+  // Czech statutory PD regime
+  "Czech-Statutory-PD": "CZ",
+  // Phase 1B-2 Group 4 AMBER bespoke gov terms jurisdictions
+  "Flanders-MGH-1.0": "BE",
+  "HK-DataGov-TOS": "HK",
+  "KOGL-Type-1": "KR",
+  "Singapore-OGL-1.0": "SG",
+  // Phase 1B-2 Group 4 UNCLEAR triage jurisdiction
+  "OGL-ROU-1.0": "RO",
 };
 
 function classifyEntityType(code: string): "license" | "terms" | "legal_regime" | "vendor_template" {
