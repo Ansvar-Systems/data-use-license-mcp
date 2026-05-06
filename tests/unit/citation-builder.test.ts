@@ -29,11 +29,13 @@ describe("buildCitation", () => {
     type_specific: {},
   };
 
-  it("includes required Source Attribution fields", () => {
+  it("includes required Source Attribution fields with catalog license", () => {
     const c = buildCitation(mit);
     expect(c.source_url).toBe("https://opensource.org/licenses/MIT");
     expect(c.publisher).toBe("opensource.org");
-    expect(c.license).toBe("CC0-1.0");
+    // Catalog row is Apache-2.0 — the source_url is a verification pointer to
+    // the upstream authority, not a re-licensing claim about the catalog.
+    expect(c.license).toBe("Apache-2.0");
     expect(c.canonical_ref).toBe("mit");
   });
 
@@ -48,5 +50,28 @@ describe("buildCitation", () => {
     const c = buildCitation(e);
     expect(c.publisher).toBe("Ansvar");
     expect(c.source_url).toBeNull();
+  });
+
+  it("vendor_template entries get Custom-Vendor license sentinel", () => {
+    const westlaw: Entity = {
+      ...mit,
+      id: "westlaw-tos",
+      entity_type: "vendor_template",
+      name: "Westlaw Terms of Service",
+      short_name: "Westlaw-TOS",
+      official_text_url: "https://legal.thomsonreuters.com/en/products/westlaw/terms",
+    };
+    const c = buildCitation(westlaw);
+    expect(c.license).toBe("Custom-Vendor");
+  });
+
+  it("never emits License-Unverified", () => {
+    const unknownDomain: Entity = {
+      ...mit,
+      official_text_url: "https://example.invalid/license-text",
+    };
+    const c = buildCitation(unknownDomain);
+    expect(c.license).not.toBe("License-Unverified");
+    expect(c.license).toBe("Apache-2.0");
   });
 });

@@ -96,6 +96,16 @@ Vendor TOS template lookup. Results carry `quality_tier: amber` baseline.
 
 **Output:** `{ results: Array<VendorResult>, _meta }`
 
+### Meta-tools
+
+Mandatory non-law meta-tools (golden standard §4.1):
+
+- **`list_sources`** — Source provenance. Expert-curated catalogs return an empty `sources` array with explanatory `notes`; per-entity provenance lives in `get_entity`'s `_citation.source_url`.
+- **`about`** — Server identity, item counts by `entity_type`, schema version, database build timestamp, network directory link.
+- **`check_data_freshness`** — DB build age and refresh status (`current` / `due` / `overdue`) against a 90-day refresh cadence. Surfaces the canonical update path.
+
+Full reference with inputs and example outputs: see [TOOLS.md](./TOOLS.md).
+
 ## Source Attribution
 
 Per-item `_citation` includes:

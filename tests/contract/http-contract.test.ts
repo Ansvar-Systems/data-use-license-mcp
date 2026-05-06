@@ -52,6 +52,33 @@ describe('HTTP contract — every tool returns a valid MCP response over HTTP', 
     const result = parseResult(res.body);
     expect(Array.isArray(result.content)).toBe(true);
   });
+
+  it('list_sources returns empty sources array over HTTP', async () => {
+    const res = await callTool(handle.port, sessionId, 'list_sources', {});
+    expect(res.statusCode).toBe(200);
+    const result = parseResult(res.body);
+    expect(Array.isArray(result.content)).toBe(true);
+    const payload = JSON.parse(result.content[0].text) as { sources: unknown[] };
+    expect(payload.sources).toHaveLength(0);
+  });
+
+  it('about returns identity payload over HTTP', async () => {
+    const res = await callTool(handle.port, sessionId, 'about', {});
+    expect(res.statusCode).toBe(200);
+    const result = parseResult(res.body);
+    const payload = JSON.parse(result.content[0].text) as { name: string; stats: { total_items: number } };
+    expect(payload.name).toBe('data-use-license');
+    expect(payload.stats.total_items).toBeGreaterThanOrEqual(61);
+  });
+
+  it('check_data_freshness returns status payload over HTTP', async () => {
+    const res = await callTool(handle.port, sessionId, 'check_data_freshness', {});
+    expect(res.statusCode).toBe(200);
+    const result = parseResult(res.body);
+    const payload = JSON.parse(result.content[0].text) as { status: string; refresh_cadence_days: number };
+    expect(['current', 'due', 'overdue']).toContain(payload.status);
+    expect(payload.refresh_cadence_days).toBe(90);
+  });
 });
 
 function initializePayload(): string {
