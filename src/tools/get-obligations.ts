@@ -80,11 +80,11 @@ export async function getObligations(input: GetObligationsInput): Promise<GetObl
       conditional_on: null,
     });
   }
-  if (ts.applies_to_database_right_separately === true) {
+  if (ts.database_rights_evidence_required === true) {
     obligations.push({
-      id: "database-right-separate",
-      title: "Database right separate from content",
-      text: "This license covers content but not EU sui generis database rights; verify database-right reuse separately.",
+      id: "database-rights-evidence-required",
+      title: "Separate database-rights evidence required",
+      text: "This license alone does not clear EU sui generis database rights. A separate evidence entry (an ODC-family license, a jurisdictional waiver, or an explicit declaration) is required to satisfy the database-rights gate when redistributing in the EEA.",
       mandatory: false,
       conditional_on: "deployment_in_eea",
     });

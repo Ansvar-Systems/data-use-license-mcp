@@ -37,13 +37,13 @@ describe("get_entity contract", () => {
       "share_alike",
       "non_commercial",
       "safe_for_public_ghcr",
-      "safe_for_commercial_serving",
-      "applies_to_database_right_separately",
+      "default_allowed_for_commercial_serving",
+      "database_rights_evidence_required",
     ]) {
       expect(ts[key], `missing ${key} in type_specific for cc-by-sa-4.0`).toBeDefined();
     }
     expect(ts.share_alike).toBe(true);
     expect(ts.safe_for_public_ghcr).toBe(false);
-    expect(ts.safe_for_commercial_serving).toBe(true);
+    expect(ts.default_allowed_for_commercial_serving).toBe(true);
   });
 });

@@ -19,8 +19,8 @@ interface UpstreamEntry {
   share_alike: boolean;
   non_commercial: boolean;
   safe_for_public_ghcr: boolean;
-  safe_for_commercial_serving: boolean;
-  applies_to_database_right_separately: boolean;
+  default_allowed_for_commercial_serving: boolean;
+  database_rights_evidence_required: boolean;
   geographic_restrictions?: string[];
   requires_vendor_terms_url?: boolean;
   audit_status?: string;
@@ -105,8 +105,8 @@ function migrate() {
         share_alike: entry.share_alike,
         non_commercial: entry.non_commercial,
         safe_for_public_ghcr: entry.safe_for_public_ghcr,
-        safe_for_commercial_serving: entry.safe_for_commercial_serving,
-        applies_to_database_right_separately: entry.applies_to_database_right_separately,
+        default_allowed_for_commercial_serving: entry.default_allowed_for_commercial_serving,
+        database_rights_evidence_required: entry.database_rights_evidence_required,
         geographic_restrictions: entry.geographic_restrictions ?? [],
         requires_vendor_terms_url: entry.requires_vendor_terms_url ?? false,
         audit_status: entry.audit_status ?? null,

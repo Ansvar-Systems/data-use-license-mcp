@@ -40,9 +40,9 @@ describe("get_obligations contract", () => {
     expect(ids).not.toContain("non-commercial");
   });
 
-  it("flags database-right-separate for EU-Decision-2011-833", async () => {
+  it("flags database-rights-evidence-required for EU-Decision-2011-833", async () => {
     const out = await getObligations({ entity_id: "eu-decision-2011-833" });
     const ids = out.obligations.map((o) => o.id);
-    expect(ids).toContain("database-right-separate");
+    expect(ids).toContain("database-rights-evidence-required");
   });
 });
