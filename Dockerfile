@@ -1,5 +1,5 @@
 # Multi-stage builder
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 RUN apk add --no-cache python3 make g++
 WORKDIR /app
 COPY package*.json ./
@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build && npm run build:db && npm prune --omit=dev
 
 # Runtime stage
-FROM node:20-alpine AS runtime
+FROM node:25-alpine AS runtime
 RUN addgroup -g 1001 -S ansvar && adduser -u 1001 -S ansvar -G ansvar
 WORKDIR /app
 COPY --from=builder --chown=ansvar:ansvar /app/dist ./dist
