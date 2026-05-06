@@ -8,12 +8,12 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     db = new Database("./data/database.db", { readonly: true });
   });
 
-  it("entities table has at least 35 rows after seed (Phase 1B-2 baseline)", () => {
+  it("entities table has at least 48 rows after seed (Phase 1B-2 Group 4 GREEN + Group 6 vendor)", () => {
     const row = db.prepare("SELECT COUNT(*) as c FROM entities").get() as { c: number };
-    expect(row.c).toBeGreaterThanOrEqual(35);
+    expect(row.c).toBeGreaterThanOrEqual(48);
   });
 
-  it("contains all 35 canonical IDs from arch-docs license catalog", () => {
+  it("contains all 48 canonical IDs from arch-docs license catalog", () => {
     const expected = [
       // Phase 1A canonical baseline (22)
       "apache-2.0", "cc-by-3.0", "cc-by-4.0", "cc-by-nc-4.0", "cc-by-nc-sa-4.0",
@@ -27,6 +27,11 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
       "isc", "lgpl-2.1-only", "lgpl-3.0-only", "mpl-2.0", "unlicense",
       // Phase 1B-2 Group 3 ODC (3)
       "odbl-1.0", "odc-by-1.0", "pddl-1.0",
+      // Phase 1B-2 Group 4 GREEN (5)
+      "dl-de-by-2.0", "dl-de-zero-2.0", "iodl-2.0", "lo-ol-luxembourg", "ogl-canada-2.0",
+      // Phase 1B-2 Group 6 vendor RED (8)
+      "bloomberg-law-tos", "heinonline-tos", "justia-tos", "lexisnexis-tos",
+      "practical-law-tos", "westlaw-tos", "wolterskluwer-tos", "vlex-tos",
     ];
     const ids = db.prepare("SELECT id FROM entities").all().map((r: { id: string }) => r.id);
     for (const id of expected) {
@@ -34,9 +39,9 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     }
   });
 
-  it("FTS5 mirror has at least 35 rows", () => {
+  it("FTS5 mirror has at least 48 rows", () => {
     const row = db.prepare("SELECT COUNT(*) as c FROM entities_fts").get() as { c: number };
-    expect(row.c).toBeGreaterThanOrEqual(35);
+    expect(row.c).toBeGreaterThanOrEqual(48);
   });
 
   it("classifies non-license entries by entity_type correctly", () => {
@@ -54,6 +59,21 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     expect(byId["etalab-2.0"]).toBe("terms");
     expect(byId["nlod-2.0"]).toBe("terms");
     expect(byId["ogl-uk-2.0"]).toBe("terms");
+    // Phase 1B-2 Group 4 GREEN — government open-data terms
+    expect(byId["dl-de-by-2.0"]).toBe("terms");
+    expect(byId["dl-de-zero-2.0"]).toBe("terms");
+    expect(byId["iodl-2.0"]).toBe("terms");
+    expect(byId["lo-ol-luxembourg"]).toBe("terms");
+    expect(byId["ogl-canada-2.0"]).toBe("terms");
+    // Phase 1B-2 Group 6 vendor RED — reference rows for negative-matching
+    expect(byId["westlaw-tos"]).toBe("vendor_template");
+    expect(byId["lexisnexis-tos"]).toBe("vendor_template");
+    expect(byId["bloomberg-law-tos"]).toBe("vendor_template");
+    expect(byId["wolterskluwer-tos"]).toBe("vendor_template");
+    expect(byId["heinonline-tos"]).toBe("vendor_template");
+    expect(byId["vlex-tos"]).toBe("vendor_template");
+    expect(byId["practical-law-tos"]).toBe("vendor_template");
+    expect(byId["justia-tos"]).toBe("vendor_template");
   });
 
   it("assigns country-scoped jurisdictions to non-international entries", () => {
@@ -65,6 +85,12 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     expect(byId["nlod-2.0"]).toBe("NO");
     expect(byId["norwegian-court-publication"]).toBe("NO");
     expect(byId["cyprus-psi"]).toBe("CY");
+    // Phase 1B-2 Group 4 GREEN jurisdictions
+    expect(byId["dl-de-by-2.0"]).toBe("DE");
+    expect(byId["dl-de-zero-2.0"]).toBe("DE");
+    expect(byId["iodl-2.0"]).toBe("IT");
+    expect(byId["lo-ol-luxembourg"]).toBe("LU");
+    expect(byId["ogl-canada-2.0"]).toBe("CA");
     expect(byId["us-federal-pd"]).toBe("US");
     expect(byId["ogl-uk-2.0"]).toBe("GB");
     expect(byId["crown-copyright"]).toBe("GB");
