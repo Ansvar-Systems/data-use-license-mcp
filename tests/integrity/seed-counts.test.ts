@@ -8,12 +8,12 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     db = new Database("./data/database.db", { readonly: true });
   });
 
-  it("entities table has at least 53 rows after seed (Phase 1B-2 Groups 1+3+4-GREEN+5+6)", () => {
+  it("entities table has at least 61 rows after seed (Phase 1B-2 Groups 1+3+4-GREEN+4-AMBER+5+6+UNCLEAR-triage+czech-PD)", () => {
     const row = db.prepare("SELECT COUNT(*) as c FROM entities").get() as { c: number };
-    expect(row.c).toBeGreaterThanOrEqual(53);
+    expect(row.c).toBeGreaterThanOrEqual(61);
   });
 
-  it("contains all 53 canonical IDs from arch-docs license catalog", () => {
+  it("contains all 61 canonical IDs from arch-docs license catalog", () => {
     const expected = [
       // Phase 1A canonical baseline (22)
       "apache-2.0", "cc-by-3.0", "cc-by-4.0", "cc-by-nc-4.0", "cc-by-nc-sa-4.0",
@@ -35,6 +35,14 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
       // Phase 1B-2 Group 5 regimes (5)
       "eu-database-directive", "french-cpi-l122-5", "german-urhg-section-5",
       "italian-lda-article-5", "spanish-lpi-article-13",
+      // Phase 1B-2 license completers PR-J arch-docs #387 (2)
+      "cc-by-nc-nd-4.0", "eupl-1.2",
+      // Phase 1B-2 Group 4 AMBER PR-E2 arch-docs #388 (4)
+      "flanders-mgh-1.0", "hk-datagov-tos", "kogl-type-1", "singapore-ogl-1.0",
+      // Phase 1B-2 Group 4 UNCLEAR triage PR-K arch-docs #389 (1)
+      "ogl-rou-1.0",
+      // Czech-law fork-A arch-docs PR #390 (1 regime)
+      "czech-statutory-pd",
     ];
     const ids = db.prepare("SELECT id FROM entities").all().map((r: { id: string }) => r.id);
     for (const id of expected) {
@@ -42,9 +50,9 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     }
   });
 
-  it("FTS5 mirror has at least 53 rows", () => {
+  it("FTS5 mirror has at least 61 rows", () => {
     const row = db.prepare("SELECT COUNT(*) as c FROM entities_fts").get() as { c: number };
-    expect(row.c).toBeGreaterThanOrEqual(53);
+    expect(row.c).toBeGreaterThanOrEqual(61);
   });
 
   it("classifies non-license entries by entity_type correctly", () => {
@@ -83,6 +91,18 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     expect(byId["german-urhg-section-5"]).toBe("legal_regime");
     expect(byId["italian-lda-article-5"]).toBe("legal_regime");
     expect(byId["spanish-lpi-article-13"]).toBe("legal_regime");
+    // Czech-law fork-A regime
+    expect(byId["czech-statutory-pd"]).toBe("legal_regime");
+    // Phase 1B-2 Group 4 AMBER (PR-E2) — bespoke government open-data terms
+    expect(byId["flanders-mgh-1.0"]).toBe("terms");
+    expect(byId["hk-datagov-tos"]).toBe("terms");
+    expect(byId["kogl-type-1"]).toBe("terms");
+    expect(byId["singapore-ogl-1.0"]).toBe("terms");
+    // Phase 1B-2 Group 4 UNCLEAR triage (PR-K) — Romanian bespoke
+    expect(byId["ogl-rou-1.0"]).toBe("terms");
+    // Phase 1B-2 license completers (PR-J) — default classify as license
+    expect(byId["eupl-1.2"]).toBe("license");
+    expect(byId["cc-by-nc-nd-4.0"]).toBe("license");
   });
 
   it("assigns country-scoped jurisdictions to non-international entries", () => {
@@ -110,5 +130,14 @@ describe("seed migration: attribution-licenses canonical baseline", () => {
     expect(byId["ogl-uk-2.0"]).toBe("GB");
     expect(byId["crown-copyright"]).toBe("GB");
     expect(byId["eu-decision-2011-833-commission-only"]).toBe("EU");
+    // Czech-law fork-A regime jurisdiction
+    expect(byId["czech-statutory-pd"]).toBe("CZ");
+    // Phase 1B-2 Group 4 AMBER bespoke gov terms jurisdictions
+    expect(byId["flanders-mgh-1.0"]).toBe("BE");
+    expect(byId["hk-datagov-tos"]).toBe("HK");
+    expect(byId["kogl-type-1"]).toBe("KR");
+    expect(byId["singapore-ogl-1.0"]).toBe("SG");
+    // Phase 1B-2 Group 4 UNCLEAR triage jurisdiction
+    expect(byId["ogl-rou-1.0"]).toBe("RO");
   });
 });
