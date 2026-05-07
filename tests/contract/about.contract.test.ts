@@ -39,4 +39,16 @@ describe("about contract", () => {
     const out = await about({});
     expect(out.disclaimer.length).toBeGreaterThan(0);
   });
+
+  it("declares open-source-license-mcp as related sibling for code-license queries", async () => {
+    // Cross-pointer disambiguation: the gateway exposes both MCPs under the
+    // same domain ("intellectual-property"), so an agent reading `about` on
+    // either side needs an explicit hand-off rule for the other's scope.
+    const out = await about({});
+    expect(Array.isArray(out.related_servers)).toBe(true);
+    const oss = out.related_servers.find((r) => r.name === "open-source-license-mcp");
+    expect(oss).toBeDefined();
+    expect(oss!.scope).toMatch(/SPDX/i);
+    expect(oss!.use_when).toMatch(/SPDX|REUSE|CRA|NOTICE/);
+  });
 });

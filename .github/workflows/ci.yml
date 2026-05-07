@@ -72,12 +72,13 @@ jobs:
 
       - name: Build database
         run: |
+          # Always rebuild when the script exists. Build is ~1s for this MCP,
+          # and the test suite needs data/database.db on every run. The previous
+          # "skip when no DB-impacting paths changed" heuristic broke any PR
+          # that touched only src/tools/* or docs/*: test step had no fallback
+          # for the missing DB and died with SQLITE_CANTOPEN.
           if jq -e '.scripts["build:db"]' package.json >/dev/null 2>&1; then
-            if [ "${{ steps.changes.outputs.db_changed }}" = "true" ]; then
-              npm run build:db
-            else
-              echo "No data/ingestion/schema change detected — skipping build:db"
-            fi
+            npm run build:db
           else
             echo "build:db script not present — skipping (native-curated MCP without DB build step)"
           fi
