@@ -5,6 +5,12 @@ export const aboutInputSchema = z.object({}).passthrough();
 
 export type AboutInput = z.infer<typeof aboutInputSchema>;
 
+export interface RelatedServer {
+  name: string;
+  scope: string;
+  use_when: string;
+}
+
 export interface AboutOutput {
   name: string;
   version: string;
@@ -23,6 +29,7 @@ export interface AboutOutput {
     name: string;
     directory: string;
   };
+  related_servers: RelatedServer[];
 }
 
 const DESCRIPTION =
@@ -32,6 +39,16 @@ const DESCRIPTION =
 
 const DISCLAIMER =
   "License metadata is informational, not legal advice. Verify against canonical text before acting.";
+
+const RELATED_SERVERS: RelatedServer[] = [
+  {
+    name: "open-source-license-mcp",
+    scope:
+      "Software / code licence compliance — full SPDX (727 licences), REUSE 3.3, CRA license obligations, NOTICE file templates",
+    use_when:
+      "User asks about SPDX licences (MIT, Apache-2.0, GPL family, BSD, MPL, EPL...), code-license compatibility, REUSE-compliant headers, CRA obligations, or NOTICE files for binary distribution",
+  },
+];
 
 export async function about(_input: AboutInput = {}): Promise<AboutOutput> {
   const meta = getDbMetadata();
@@ -54,5 +71,6 @@ export async function about(_input: AboutInput = {}): Promise<AboutOutput> {
       name: "Ansvar MCP Network",
       directory: "https://ansvar.ai/mcp",
     },
+    related_servers: RELATED_SERVERS,
   };
 }
